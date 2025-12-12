@@ -1,4 +1,4 @@
-# doc: gh-page
+# free-ran-ue.github.io
 
 1. Create venv
 
