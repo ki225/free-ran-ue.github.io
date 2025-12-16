@@ -71,7 +71,7 @@ If you want to build the image from source code, you need to run this step; othe
     git clone https://github.com/free-ran-ue/free-ran-ue
     ```
 
-- Build image locally
+- Build image under `fru-compose` directory locally
 
     ```bash
     make
