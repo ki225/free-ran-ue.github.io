@@ -50,7 +50,7 @@
 
 ## B. (Optional) Build free-ran-ue Image
 
-If you want to build the image from source code, you need to run the make command; otherwise, the compose file will pull the image from [docker hub](https://hub.docker.com/r/alonza0314/free-ran-ue/tags) with the latest tag. You can also modify the tag in the compose file for specified version.
+If you want to build the image from source code, you need to run this step; otherwise, the compose file will pull the image from [docker hub](https://hub.docker.com/r/alonza0314/free-ran-ue/tags) with the latest tag. You can also modify the tag in the compose file for specified version.
 
 - Clone
 
@@ -58,10 +58,16 @@ If you want to build the image from source code, you need to run the make comman
     git clone https://github.com/free-ran-ue/fru-compose.git
     ```
 
-- Build Image
+- Clone the source code and put it under `fru-compose` directory
 
     ```bash
     cd fru-compose
+    git clone https://github.com/free-ran-ue/free-ran-ue
+    ```
+
+- Build image locally
+
+    ```bash
     make
     ```
 
