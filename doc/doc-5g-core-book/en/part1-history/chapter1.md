@@ -169,6 +169,12 @@ To meet the requirements described above, 3GPP defined several fundamental desig
 
 Through the adoption of SBA, CUPS, and cloud-native network slicing, the 5G Core represents a significant evolution from previous generations. It transitions from a **single-purpose, inflexible telecom core network** toward a **programmable, sliceable, and highly customizable general-purpose digital infrastructure**, allowing for further innovative applications.
 
+## 1.4 Chapter Summary
+
+This chapter begins by addressing the question of “what the core network is” and explaining its role in mobile communication systems. The core network functions as the “brain” of the network, responsible for subscriber authentication, resource allocation and management, traffic routing decisions, and support for charging and accounting. Then the chapter reviews the overall architecture of the 4G Evolved Packet Core (EPC) and the responsibilities of its key network elements, including the HSS, MME, S-GW, P-GW, and eNodeB. It also highlights the major limitations of 2G/3G/4G core networks, such as closed and inflexible architectures, incomplete separation of control and user planes, limited service diversity, and constraints in scalability and cloud-native capability.
+
+Building on this background, the chapter summarizes the motivations and design principles behind the emergence of the 5GC. To support diverse service scenarios such as **eMBB**, **URLLC**, and **mMTC**, as well as the differentiated requirements of vertical industries and enterprise private networks, the 5GC adopts a service-based architecture (SBA), a more thorough separation of control and user planes (CUPS), and cloud-native design with network slicing. These design choices enable the core network to evolve from a traditional, closed telecom system into a programmable and highly customizable digital infrastructure. In the following chapters, this historical context serves as the foundation for a more systematic introduction to the functions and architecture of the 5G Core network from a 3GPP perspective.
+
 
 <div class="chapter-nav">
   <a href="../chapter2/" class="nav-btn nav-next" title="Next：5G Core Network Overview from 3GPP Perspective">
