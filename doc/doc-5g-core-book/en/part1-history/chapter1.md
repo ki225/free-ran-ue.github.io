@@ -107,6 +107,68 @@ Although 2G, 3G, and 4G core networks successfully support voice, messaging, and
 
 As a result of the limitations described above, when mobile networks evolved from a single, best-effort public service toward diverse vertical and industry-specific use cases, existing 2G/3G/4G core network architectures increasingly struggled to meet these demands. This evolution became a key motivation for the redesign of the 5G Core (5GC) and the introduction of service-based architecture (SBA), cloud-native principles, and network slicing.
 
+## 1.3 Requirements and Design Principles of the 5G Core Network (5GC)
+
+### 1.3.1 Requirements of the 5G Core Network
+
+5G is not simply a faster version of 4G. Instead, it is designed to simultaneously support three fundamentally different service categories, which directly shape the architectural design of the 5G Core (5GC).
+
+- **eMBB（enhanced Mobile Broadband）**
+
+    The primary objective of eMBB is to deliver higher data rates and significantly increased capacity, enabling applications such as 4K/8K video streaming, AR/VR, and cloud gaming.
+    From a core network perspective, this requires the ability to handle large volumes of high-bandwidth traffic while maintaining stable Quality of Service (QoS) under heavy load conditions, including throughput, latency, and packet loss performance.
+
+- **URLLC (Ultra-Reliable Low Latency Communications)**
+
+    Targets use cases such as autonomous driving, remote surgery, and industrial control systems, which demand millisecond-level or even sub-millisecond latency combined with extremely high reliability.
+    To meet these requirements, the core network must minimize end-to-end data paths and support the placement of user plane functions closer to the network edge (e.g., through MEC), while also providing fine-grained prioritization and enhanced protection mechanisms.
+
+- **mMTC（massive Machine Type Communications）**
+
+    mMTC addresses scenarios involving massive numbers of IoT devices, such as smart meters, sensors, and wearable devices. Although each device typically generates low traffic volumes, the device density is extremely high.
+    The core network must therefore support high-density device registration, low-cost connectivity, and connection models optimized for long idle periods and intermittent data transmission, including energy-efficient and power-saving mechanisms introduced in 5G.
+
+Beyond these three service categories, **the rapid proliferation of diverse IoT and vertical industry services** has introduced new requirements for the 5G Core (5GC):
+
+- Different enterprises and industries (e.g., manufacturing, autonomous vehicles, healthcare) exhibit highly diverse requirements in terms of security, isolation, latency, and reliability
+- The traditional “one network serving all users” model is no longer sufficient; the network must support rapid creation of customized network slices and policies tailored to specific customers and applications
+- The core network must integrate more seamlessly with IT and cloud environments, enabling automated deployment, elastic scaling, and DevOps-oriented operational models
+
+Together, these requirements drive the evolution of the 5G Core from traditional telecom appliance-based systems toward a cloud-native, service-based architecture.
+
+### 1.3.2 Design Principles of the 5G Core Network
+
+To meet the requirements described above, 3GPP defined several fundamental design principles when specifying the 5G Core (5GC), which can be broadly summarized into three key directions:
+
+- **Introduction of SBA (Service-Based Architecture)**
+
+    The 5GC is no longer centered around a “single, monolithic network function.” Instead, core functionalities are decomposed into multiple network functions (NFs), such as the AMF, SMF, UPF, UDM, and PCF, which interact with each other through **HTTP + JSON / REST-style interfaces**.  
+    Each NF exposes clearly defined services, and other NFs can discover and invoke these services by name. This design:
+
+    - Enables independent development, upgrade, and scaling of network functions
+    - Facilitates the adoption of microservices and containerization technologies (e.g., Kubernetes)    
+    - Brings telecom network architecture closer to conventional IT and cloud system design paradigms
+
+- **Support for CUPS (Control and User Plane Separation)**
+
+    Although CUPS was already introduced in the 4G EPC, the separation between the control plane (e.g., AMF, SMF) and the user plane (UPF) is more thoroughly realized in the 5GC.  
+    As a result:
+
+    - The control plane can be centrally deployed, enabling unified management of control logic and policies 
+    - User plane functions (UPFs) can be flexibly distributed toward the network edge or across different geographic locations, shortening data paths and reducing latency  
+    - Control plane and user plane resources can be independently scaled in or out based on traffic characteristics and service requirements
+
+- **Cloud-Native Design and Network Slicing**
+
+    From the outset, the 5GC is designed to operate in cloud environments, with support for containerization, microservices, and automated orchestration. 
+    Building on this foundation, the 5GC introduces the concept of **Network Slicing**, whereby multiple end-to-end logical “virtual networks” are created on top of a shared physical infrastructure. Each network slice can have:
+
+    - Different combinations and configurations of network functions
+    - Distinct QoS policies, security levels, and management logic
+    - Alignment with specific customers or industry scenarios (e.g., one slice dedicated to mMTC and another to URLLC-based industrial control) 
+
+Through the adoption of SBA, CUPS, and cloud-native network slicing, the 5G Core represents a significant evolution from previous generations. It transitions from a **single-purpose, inflexible telecom core network** toward a **programmable, sliceable, and highly customizable general-purpose digital infrastructure**, allowing for further innovative applications.
+
 
 <div class="chapter-nav">
   <a href="../chapter2/" class="nav-btn nav-next" title="Next：5G Core Network Overview from 3GPP Perspective">
