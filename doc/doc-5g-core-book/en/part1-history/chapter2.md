@@ -156,6 +156,47 @@ Compared to traditional point-to-point, interface-specific interactions between 
 - **Interoperability**: By adhering to common API specifications, different implementations can interoperate more easily, reducing vendor lock-in.
 - **Testability**: Developers and testers can validate individual NFs or specific APIs in isolation, without having to deploy the entire system end to end.
 
+## 2.4 5G Interfaces and Protocol Classification (N1 / N2 / N3 / N4 / N6 / SBA)
+
+This section is one of the core parts of the chapter. We organize the commonly used 5G interfaces based on the distinction between the “control plane and the user plane.”
+
+![5gc-n](../../image/part1/5gc-n.png)
+
+### 2.4.1 Control Plane Interfaces
+
+The control plane is primarily responsible for “signaling and coordination,” rather than carrying large volumes of user data. Common control-plane interfaces include the following:
+
+- **N1：UE ↔ 5GC (NAS)**
+
+    - This interface carries high-level control signaling between the UE and the 5GC, such as registration procedures and PDU session establishment requests.
+    - The signaling content is referred to as **NAS (Non-Access Stratum)** and is transported via the RAN to the AMF.
+
+- **N2：RAN ↔ 5GC (NGAP)**
+
+    - This is the control interface between the gNB and the 5GC, specifically the AMF.
+    - It uses the **NGAP** protocol, which handles functions such as UE context setup, handover control, and PDU Session–related control signaling.
+
+- **N4：SMF ↔ UPF (PFCP)**
+
+    - This interface is used by the SMF to instruct the UPF on how to establish or update forwarding rules, such as which Data Network (DN) packets should be routed to and which QoS parameters should be applied.
+
+- **Nn：5GC NF ↔ NF (SBA / HTTP/2)**
+
+    - This is a collective term representing service-based interactions between network functions within the 5GC.
+    - These interactions are implemented using HTTP/2 and JSON, i.e., the Service-Based Interface (SBI) discussed earlier; typical examples include interactions between the AMF and SMF, or between the SMF and PCF.
+
+### 2.4.2 User Plane Interfaces
+
+The user plane represents the path that “actually carries user data, such as packets for video streaming, web browsing, and data transfer”:
+
+- **N3：RAN ↔ UPF (GTP-U)**
+
+    - This interface provides the user-plane tunnel between the gNB and the UPF.
+    - It uses the GTP-U protocol to encapsulate UE IP packets, similar to the S1-U interface in 4G.
+
+- **N6：UPF ↔ DN (Data Network)**
+
+    - This interface connects the UPF to external data networks, such as the public Internet or enterprise private networks.
 
 <div class="chapter-nav">
   <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next：free5GC Overall Architecture and Module Introduction">
