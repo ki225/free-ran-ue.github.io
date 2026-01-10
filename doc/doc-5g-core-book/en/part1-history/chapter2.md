@@ -20,17 +20,17 @@ It is not a single company, but a “collaborative partnership platform” whose
 
 Within 3GPP, the work is broadly divided into three major domains:
 
-- **SA（Service & System Aspects）**
+- **SA (Service & System Aspects)**
 
     Responsible for the design of the “overall architecture” and “service requirements.”
     This includes topics such as the overall architecture of the 5G System (5GS), how network functions are decomposed, what interfaces exist between them, and what types of services are supported.
 
-- **RAN（Radio Access Network）**
+- **RAN (Radio Access Network)**
 
     Focuses on “radio access technologies,” specifically the NR (New Radio) protocol stack, signaling design, and air-interface specifications.
     The commonly referenced **38.xxx series** (e.g., TS 38.300 and TS 38.331) are the specifications that define the RAN.
 
-- **CT（Core Network & Terminals）**
+- **CT (Core Network & Terminals)**
 
     Responsible for “core network and terminal signaling protocols.”
     This includes how the UE interacts with the core network, the definition of NAS and NGAP signaling, and the detailed procedures for call and session handling.
@@ -84,8 +84,8 @@ These documents primarily address “UE ↔ gNB (base station)” interactions. 
 
 According to 3GPP definitions, the 5G System (5GS) consists of two main parts:
 
-- **5GC（5G Core）**: the primary focus of this book
-- **NR（New Radio）/ NG-RAN**: the new radio access network (including gNB)
+- **5GC (5G Core)**: the primary focus of this book
+- **NR (New Radio)/ NG-RAN**: the new radio access network (including gNB)
 
 Together, these form a complete 5G system.
 Therefore, the 5G System (5GS) can be understood as “the end-to-end network formed by the 5G Core (5GC) and NR.”
@@ -100,10 +100,10 @@ From a user’s point of view, when a smartphone(UE) accesses the network, the d
 
 ![5gc](../../image/part1/5gc.png)
 
-- **UE（User Equipment）**: smartphones, CPEs, IoT devices, etc.
+- **UE (User Equipment)**: smartphones, CPEs, IoT devices, etc.
 - **RAN (Radio Access Network, i.e., gNB / NG-RAN)**: converts radio signals into packets and connects them to the core network
-- **5GC（5G Core）**: handles registration, identity management, routing, policy control, and charging
-- **DN（Data Network）**: such as the Internet, enterprise private networks, public cloud VPCs, or IMS networks
+- **5GC (5G Core)**: handles registration, identity management, routing, policy control, and charging
+- **DN (Data Network)**: such as the Internet, enterprise private networks, public cloud VPCs, or IMS networks
 
 ### 2.2.2 Division of Responsibilities Between the RAN and the Core
 
@@ -119,7 +119,7 @@ From a user’s point of view, when a smartphone(UE) accesses the network, the d
 
 This division of responsibilities is conceptually similar to that of the 4G era. However, in 5G, the separation between the control plane and the user plane is made much more explicit, enabling greater optimization and more flexible deployment options.
 
-## 2.3 SBA（Service-Based Architecture）
+## 2.3 SBA (Service-Based Architecture)
 
 In the 4G EPC, many network elements communicate with each other using **Diameter** or other traditional telecom protocols.
 With the 5G core network, 3GPP introduced a major architectural shift: **the adoption of a Service-Based Architecture (SBA) built on HTTP and JSON**.
@@ -197,6 +197,47 @@ The user plane represents the path that “actually carries user data, such as p
 - **N6：UPF ↔ DN (Data Network)**
 
     - This interface connects the UPF to external data networks, such as the public Internet or enterprise private networks.
+
+## 2.5 Overview of Key 5G Core Procedures
+
+This section introduces several of the most important procedures in 5G at a “conceptual level.” Rather than diving into the detailed behavior of each network element, the goal here is to help you first see the overall storyline of how the system operates.
+
+### 2.5.1 Registration Procedure (NAS / NGAP)
+
+Registration can be viewed as the “registration / login procedure” in 5G. At a high level, it consists of the following key steps:
+
+1. **UE initiates a Registration Request**: When the UE powers on or enters a 5G network, it sends a NAS Registration Request to the AMF via the RAN.
+2. **UE context establishment**: After receiving the request, the AMF creates a “context” for the device, which includes information such as identity, location, and capabilities.
+3. **Security-related procedures**: These include authentication and security mode control, ensuring that subsequent signaling and data transmission are protected and encrypted.
+4. **Registration Complete**: After all required exchanges and configurations are completed, the UE responds with Registration Complete to indicate that it has successfully “logged in” to the 5G network.
+
+> [!Tip]
+> The **registration** procedure is the first access procedure initiated by the UE toward the core network when it powers on or exits airplane mode.
+
+### 2.5.2 PDU Session Procedure
+
+In 4G, we often refer to **bearers**. In 5G, the corresponding core concept is the **PDU session**, which you can think of as “a **logical connection** between the UE and a specific Data Network (DN).”
+
+At a high level, the procedure works as follows:
+
+1. **UE requests PDU session establishment**: When the UE wants to access the Internet or connect to a specific service, it sends a PDU Session Establishment Request.
+2. **SM control-plane decisions**: The SMF in the core network determines which UPF and which DN the PDU session should be associated with, as well as the QoS parameters to be applied.
+3. **User-plane path establishment**: The user-plane path of the PDU session is constructed through N3 (RAN ↔ UPF) and N6 (UPF ↔ DN).
+
+Afterward, the UE’s data packets are forwarded along this PDU session. A single UE may have multiple PDU sessions simultaneously, each corresponding to a different service or network.
+
+> [!Tip]
+> Establishing a PDU session is essentially about creating a logical connection from the UE to a Data Network (DN)!
+
+### 2.5.3 Handover Concept
+
+Handover refers to the process by which a UE moves from one base station to another without interrupting the ongoing connection as it travels.
+
+At this level, it is sufficient to understand two key aspects:
+
+- **Control-plane relocation**: The system updates the UE’s location information so that the core network knows which RAN the UE is currently connected through.
+
+- **User-plane path switching**: To ensure that packets continue to reach the UE, the forwarding path is switched from the old gNB to the new gNB. In some cases, the user-plane path at the UPF may also need to be updated.
 
 <div class="chapter-nav">
   <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next：free5GC Overall Architecture and Module Introduction">
