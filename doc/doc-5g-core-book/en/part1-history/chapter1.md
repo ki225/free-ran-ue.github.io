@@ -1,4 +1,4 @@
-# Chapter 1：From 4G to 5G — Evolution of Core Network Architecture
+# Chapter 1: From 4G to 5G — Evolution of Core Network Architecture
 
 ## 1.1 What is core network (CN)?
 We can think of the core network as “the brain of a telecommunications system.” It is responsible for making decisions and coordinating actions between user equipment (UE)—such as smartphones—and the external world (e.g., the Internet, enterprise private networks, and other operators’ networks). When a phone powers on, registers, accesses the Internet, makes a call, or uses apps, most of the key control logic behind these actions is handled by the core network.
@@ -43,26 +43,26 @@ In 4G systems, the Evolved Packet Core (EPC) serves as the central component tha
 
 ![epc](../../image/part1/epc.png)
 
-- HSS（Home Subscriber Server）
+- HSS (Home Subscriber Server)
 
     - Storing subscriber information, such as International Mobile Subscriber Identity (IMSI), Mobile Station International Subscriber Directory Number (MSISDN), Service Permissions, and roaming permissions.
     - Maintaining authentication keys and security parameters used during UE authentication.
     - Providing subscription and roaming information to the MME to support mobility and access control decisions.
 
-- MME（Mobility Management Entity）
+- MME (Mobility Management Entity)
 
     - Handling UE attach, detach, and registration procedures.
     - Managing mobility, including tracking the UE’s serving eNodeB and coordinating handovers.
     - Authenticating subscribers through interaction with the HSS and determining whether network access is permitted.
     - Coordinating with the S-GW and P-GW during bearer establishment to create the appropriate EPS bearers.
 
-- S-GW（Serving Gateway）
+- S-GW (Serving Gateway)
 
     - Forwarding user-plane traffic between the eNodeB and the P-GW
     - Serving as a stable mobility anchor during.inter-eNodeB or inter-area mobility, reducing the need for frequent path re-establishment.
     - Supporting partial charging and traffic accounting functions for downstream billing systems.
 
-- P-GW（Packet Data Network Gateway）
+- P-GW (Packet Data Network Gateway)
 
     - Assigning IP addresses to UEs to enable communication with the Internet or enterprise networks.
     - Enforcing policy and charging control in coordination with the PCRF, including bandwidth limitations, service blocking or allowance, and traffic shaping.
@@ -113,7 +113,7 @@ As a result of the limitations described above, when mobile networks evolved fro
 
 5G is not simply a faster version of 4G. Instead, it is designed to simultaneously support three fundamentally different service categories, which directly shape the architectural design of the 5G Core (5GC).
 
-- **eMBB（enhanced Mobile Broadband）**
+- **eMBB (enhanced Mobile Broadband)**
 
     The primary objective of eMBB is to deliver higher data rates and significantly increased capacity, enabling applications such as 4K/8K video streaming, AR/VR, and cloud gaming.
     From a core network perspective, this requires the ability to handle large volumes of high-bandwidth traffic while maintaining stable Quality of Service (QoS) under heavy load conditions, including throughput, latency, and packet loss performance.
@@ -123,7 +123,7 @@ As a result of the limitations described above, when mobile networks evolved fro
     Targets use cases such as autonomous driving, remote surgery, and industrial control systems, which demand millisecond-level or even sub-millisecond latency combined with extremely high reliability.
     To meet these requirements, the core network must minimize end-to-end data paths and support the placement of user plane functions closer to the network edge (e.g., through MEC), while also providing fine-grained prioritization and enhanced protection mechanisms.
 
-- **mMTC（massive Machine Type Communications）**
+- **mMTC (massive Machine Type Communications)**
 
     mMTC addresses scenarios involving massive numbers of IoT devices, such as smart meters, sensors, and wearable devices. Although each device typically generates low traffic volumes, the device density is extremely high.
     The core network must therefore support high-density device registration, low-cost connectivity, and connection models optimized for long idle periods and intermittent data transmission, including energy-efficient and power-saving mechanisms introduced in 5G.
@@ -177,7 +177,7 @@ Building on this background, the chapter summarizes the motivations and design p
 
 
 <div class="chapter-nav">
-  <a href="../chapter2/" class="nav-btn nav-next" title="Next：5G Core Network Overview from 3GPP Perspective">
+  <a href="../chapter2/" class="nav-btn nav-next" title="Next: 5G Core Network Overview from 3GPP Perspective">
     <span class="arrow"></span>
   </a>
 </div>
