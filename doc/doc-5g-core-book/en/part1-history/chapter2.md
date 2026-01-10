@@ -261,7 +261,7 @@ Quality of Service (QoS) is a fundamental topic in mobile networks. In 4G, QoS i
 In 5G, each QoS flow is associated with several key attributes (which will be discussed in more detail later in this book). Here, we first introduce a few essential terms:
 
 - **QFI (QoS Flow Identifier)**: An identifier used to uniquely distinguish a QoS flow.
-- **5QI（5G QoS Identifier）**: 5QI defines the QoS characteristics associated with a QoS flow.
+- **5QI (5G QoS Identifier)**: 5QI defines the QoS characteristics associated with a QoS flow.
 
     - Latency requirements
     - Priority level
@@ -279,6 +279,42 @@ In 5G, each QoS flow is associated with several key attributes (which will be di
     - By enforcing MBR, the system prevents a single flow from consuming excessive resources when capacity is abundant, thereby preventing other users or services from being impacted.
 
 Through this design, 5G can flexibly support diverse service scenarios such as eMBB, URLLC, and mMTC. Even within a single PDU session, different types of traffic can be treated with different QoS levels.
+
+## 2.7 5G Security Introduction
+
+Security is a fundamental aspect of 5G design. However, this chapter does not dive into cryptographic algorithms or mathematical details. Instead, we introduce a few key concepts to help you build a first impression of the 5G security mechanisms.
+
+### 2.7.1 5G AKA (Authentication and Key Agreement)
+
+5G inherits and extends the AKA framework used in previous generations:
+
+- It verifies the identities of both the UE and the network through a challenge–response mechanism.
+- At the same time, it derives cryptographic keys that are later used to protect signaling and data.
+
+You can think of this process as: “both sides first confirm that I really am who I claim to be and that you really are who you claim to be, and then jointly decide which keys will be used to lock the door.”
+
+### 2.7.2 SUCI / SUPI: Privacy Protection
+
+To better protect user privacy, 5G introduces the following identifiers:
+
+- **SUPI (Subscription Permanent Identifier)**: Represents the user’s permanent identity, similar to a “real identity” (e.g., corresponding to the IMSI).
+
+- **SUCI (Subscription Concealed Identifier)**: It is an encrypted, privacy-protected identifier transmitted over the air interface, thereby preventing direct exposure of the user’s permanent identity even under radio eavesdropping. As a result, even if an attacker eavesdrops on the radio interface, it is difficult to directly reveal the user’s true identity.
+
+## 2.8 Chapter Summary
+
+In this chapter, we took a bird’s-eye view of the 5G system and core network from a 3GPP perspective:
+
+- Understood the **role of 3GPP** and the division of responsibilities among SA, RAN, and CT in 5G standardization
+- Clarified the roles of **TS 23.501 / 23.502 / 23.503** in defining architecture, procedures, and policy
+- Examined the overall structure of **5GS = 5GC + NR**, as well as the high-level relationship between UE, RAN, 5GC, and DN.
+- Established a foundational understanding of **the separation between the control plane (N1 / N2 / N4 / Nn) and the user plane (N3 / N6)**
+- Gained an initial understanding of the **Service-Based Architecture (SBA)** and the role of the Service-Based Interface (SBI)
+- Followed the high-level flow of key procedures, including Registration, PDU Session establishment, and Handover
+- Compared the **5G QoS Flow / 5QI** model with the 4G bearer-based QoS model
+- Formed a first impression of **basic 5G security concepts**, including AKA, SUCI/SUPI, and security mode procedures
+
+In the following chapters, we will build on the 5G architecture by analyzing the open-source project free5GC, and gradually break down the roles and internal procedures of individual network elements (such as the AMF, SMF, and UPF). This will take you from “understanding the overall map” to “understanding what happens along each individual path.”
 
 <div class="chapter-nav">
   <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next: free5GC Overall Architecture and Module Introduction">
