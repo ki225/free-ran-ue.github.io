@@ -1,4 +1,4 @@
-# Chapter 2：5G Core Network Overview from 3GPP Perspective
+# Chapter 2: 5G Core Network Overview from 3GPP Perspective
 
 In Chapter 1, we started by discussing “why a core network is needed” and “the evolution and limitations of the 4G EPC.”
 From this chapter onward, we will adopt a **3GPP-centric perspective** to examine the design of the entire 5G System (5GS), covering:
@@ -75,7 +75,7 @@ Among the specifications related to the 5G core network, the following three Tec
 The specifications discussed above are primarily core-network-oriented. On the radio access (RAN) side of 5G, you will frequently encounter documents starting with 38.xxx, for example:
 
 - **TS 38.300**: Describes the overall architecture of NR and NG-RAN
-- **TS 38.331**：Defines the RRC (Radio Resource Control) protocol, i.e., the control signaling between the UE and the gNB
+- **TS 38.331**: Defines the RRC (Radio Resource Control) protocol, i.e., the control signaling between the UE and the gNB
 - Additional 38.3xx / 38.4xx specifications cover details of the physical layer, MAC, RLC, PDCP, and related protocols
 
 These documents primarily address “UE ↔ gNB (base station)” interactions. Since this book focuses on the **5G Core (5GC)**, RAN signaling will only be briefly referenced when necessary, mainly to help establish end-to-end context.
@@ -166,21 +166,21 @@ This section is one of the core parts of the chapter. We organize the commonly u
 
 The control plane is primarily responsible for “signaling and coordination,” rather than carrying large volumes of user data. Common control-plane interfaces include the following:
 
-- **N1：UE ↔ 5GC (NAS)**
+- **N1: UE ↔ 5GC (NAS)**
 
     - This interface carries high-level control signaling between the UE and the 5GC, such as registration procedures and PDU session establishment requests.
     - The signaling content is referred to as **NAS (Non-Access Stratum)** and is transported via the RAN to the AMF.
 
-- **N2：RAN ↔ 5GC (NGAP)**
+- **N2: RAN ↔ 5GC (NGAP)**
 
     - This is the control interface between the gNB and the 5GC, specifically the AMF.
     - It uses the **NGAP** protocol, which handles functions such as UE context setup, handover control, and PDU Session–related control signaling.
 
-- **N4：SMF ↔ UPF (PFCP)**
+- **N4: SMF ↔ UPF (PFCP)**
 
     - This interface is used by the SMF to instruct the UPF on how to establish or update forwarding rules, such as which Data Network (DN) packets should be routed to and which QoS parameters should be applied.
 
-- **Nn：5GC NF ↔ NF (SBA / HTTP/2)**
+- **Nn: 5GC NF ↔ NF (SBA / HTTP/2)**
 
     - This is a collective term representing service-based interactions between network functions within the 5GC.
     - These interactions are implemented using HTTP/2 and JSON, i.e., the Service-Based Interface (SBI) discussed earlier; typical examples include interactions between the AMF and SMF, or between the SMF and PCF.
@@ -189,12 +189,12 @@ The control plane is primarily responsible for “signaling and coordination,”
 
 The user plane represents the path that “actually carries user data, such as packets for video streaming, web browsing, and data transfer”:
 
-- **N3：RAN ↔ UPF (GTP-U)**
+- **N3: RAN ↔ UPF (GTP-U)**
 
     - This interface provides the user-plane tunnel between the gNB and the UPF.
     - It uses the GTP-U protocol to encapsulate UE IP packets, similar to the S1-U interface in 4G.
 
-- **N6：UPF ↔ DN (Data Network)**
+- **N6: UPF ↔ DN (Data Network)**
 
     - This interface connects the UPF to external data networks, such as the public Internet or enterprise private networks.
 
@@ -239,8 +239,49 @@ At this level, it is sufficient to understand two key aspects:
 
 - **User-plane path switching**: To ensure that packets continue to reach the UE, the forwarding path is switched from the old gNB to the new gNB. In some cases, the user-plane path at the UPF may also need to be updated.
 
+## 2.6 QoS Flows and 5QI: Differences Between 5G and 4G QoS Models
+
+Quality of Service (QoS) is a fundamental topic in mobile networks. In 4G, QoS is commonly discussed in terms of bearers. In 5G, however, the QoS flow becomes the more central concept.
+
+### 2.6.1 4G Bearer vs 5G QoS Flow
+
+- In **4G**, an EPS bearer typically corresponds to a single set of QoS parameters. The UE and the core network establish or modify bearers to support specific services.
+- In **5G**, a PDU session acts as a “primary tunnel,” and **multiple QoS flows can be associated with a single PDU session**, each with its own QoS characteristics.
+
+> [!Note]
+> What does this mean in practice?
+>
+> Within the same PDU session, different types of traffic can be mapped to different QoS flows. For example:
+>
+> - A single UE may use one PDU session to carry both general Internet traffic and real-time voice traffic.
+> - The network can assign higher priority and lower latency to voice traffic, while applying more relaxed QoS settings to best-effort data traffic.
+
+### 2.6.2 Flow-level QoS: QFI、5QI、GBR / Non-GBR、MBR
+
+In 5G, each QoS flow is associated with several key attributes (which will be discussed in more detail later in this book). Here, we first introduce a few essential terms:
+
+- **QFI (QoS Flow Identifier)**: An identifier used to uniquely distinguish a QoS flow.
+- **5QI（5G QoS Identifier）**: 5QI defines the QoS characteristics associated with a QoS flow.
+
+    - Latency requirements
+    - Priority level
+    - Packet loss tolerance
+
+- **GBR / Non-GBR**: 
+
+    - GBR (Guaranteed Bit Rate): Ensures that a minimum bit rate is guaranteed for the flow.
+    - Non-GBR: Does not guarantee a specific bit rate, and most general data services fall into this category.
+
+- **MBR (Maximum Bit Rate)**: 
+
+    - As the name suggests, this defines “the maximum bandwidth,” and it is often used in conjunction with GBR.
+    - Put simply: GBR specifies “at least this much bandwidth,” while MBR specifies “no more than this much bandwidth.”
+    - By enforcing MBR, the system prevents a single flow from consuming excessive resources when capacity is abundant, thereby preventing other users or services from being impacted.
+
+Through this design, 5G can flexibly support diverse service scenarios such as eMBB, URLLC, and mMTC. Even within a single PDU session, different types of traffic can be treated with different QoS levels.
+
 <div class="chapter-nav">
-  <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next：free5GC Overall Architecture and Module Introduction">
+  <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next: free5GC Overall Architecture and Module Introduction">
     <span class="arrow"></span>
   </a>
 </div>
