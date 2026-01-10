@@ -121,7 +121,7 @@ This division of responsibilities is conceptually similar to that of the 4G era.
 
 ## 2.3 SBA (Service-Based Architecture)
 
-In the 4G EPC, many network elements communicate with each other using **Diameter** or other traditional telecom protocols.
+In the 4G EPC, many network functions communicate with each other using **Diameter** or other traditional telecom protocols.
 With the 5G core network, 3GPP introduced a major architectural shift: **the adoption of a Service-Based Architecture (SBA) built on HTTP and JSON**.
 
 ### 2.3.1 Why Move from Diameter to HTTP + JSON?
@@ -129,7 +129,7 @@ With the 5G core network, 3GPP introduced a major architectural shift: **the ado
 There are several key reasons for this transition:
 
 - Bringing telecom networks closer to the IT and cloud technology stack, making it easier to integrate existing tools and ecosystems
-- Making interactions between network elements more “microservices-like”: each network element exposing a clearly defined set of APIs
+- Making interactions between network functions more “microservices-like”: each network function exposing a clearly defined set of APIs
 - Offering advantages over Diameter in terms of multiplexing, latency characteristics, and deployment flexibility
 
 For developers and researchers, this also means that parts of the 5G core network logic can be understood and implemented using familiar web technologies.
@@ -149,7 +149,7 @@ These services communicate through a unified conceptual interface known as the *
 
 ### 2.3.3 Advantages of SBA
 
-Compared to traditional point-to-point, interface-specific interactions between network elements, SBA offers several clear advantages:
+Compared to traditional point-to-point, interface-specific interactions between network functions, SBA offers several clear advantages:
 
 - **Scalability**: When the load on a particular NF increases, additional instances can be deployed. As long as they are registered with the NRF, they can be used dynamically.
 - **Replaceability**: Multiple implementations or versions of the same NF can coexist, potentially from different vendors, with compatibility achieved through standardized APIs.
@@ -200,7 +200,7 @@ The user plane represents the path that “actually carries user data, such as p
 
 ## 2.5 Overview of Key 5G Core Procedures
 
-This section introduces several of the most important procedures in 5G at a “conceptual level.” Rather than diving into the detailed behavior of each network element, the goal here is to help you first see the overall storyline of how the system operates.
+This section introduces several of the most important procedures in 5G at a “conceptual level.” Rather than diving into the detailed behavior of each network function, the goal here is to help you first see the overall storyline of how the system operates.
 
 ### 2.5.1 Registration Procedure (NAS / NGAP)
 
@@ -314,7 +314,7 @@ In this chapter, we took a bird’s-eye view of the 5G system and core network f
 - Compared the **5G QoS Flow / 5QI** model with the 4G bearer-based QoS model
 - Formed a first impression of **basic 5G security concepts**, including AKA, SUCI/SUPI, and security mode procedures
 
-In the following chapters, we will build on the 5G architecture by analyzing the open-source project free5GC, and gradually break down the roles and internal procedures of individual network elements (such as the AMF, SMF, and UPF). This will take you from “understanding the overall map” to “understanding what happens along each individual path.”
+In the following chapters, we will build on the 5G architecture by analyzing the open-source project free5GC, and gradually break down the roles and internal procedures of individual network functions (such as the AMF, SMF, and UPF). This will take you from “understanding the overall map” to “understanding what happens along each individual path.”
 
 <div class="chapter-nav">
   <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next: free5GC Overall Architecture and Module Introduction">

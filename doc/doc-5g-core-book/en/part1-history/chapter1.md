@@ -7,17 +7,17 @@ The functions of the core network can be broadly grouped into several aspects:
 
 1. **User Registration**
 
-    The core network identifies “who you are” and checks a set of subscriber-related conditions. For example, whether you are a legitimate subscriber, whether your subscription (phone number/MSISDN) is valid, whether there are unpaid bills, and whether roaming is permitted, among others. In 4G/5G systems, this typically involves **authentication**, **registration/attach**, and establishing a corresponding **session/context** for each subscriber.
+    The core network identifies “who you are” and checks a set of subscriber-related conditions. For example, whether you are a legitimate subscriber, whether your phone number is valid, whether there are unpaid bills, and whether roaming is permitted, among others. In 4G/5G systems, this typically involves **authentication**, **registration/attach**, and **session/context** for each subscriber.
     
 2. **Resource Management**
 
-    When a user starts transmitting data (e.g., watching YouTube or joining a Teams meeting) or sets up a voice call, the core network allocates appropriate resources for the traffic. This includes:
+    When a user starts transmitting data (e.g., watching YouTube or joining a Teams meeting) or sets up a voice call, the core network allocates appropriate resources for the traffic. The Core Network is responsible for:
 
     - Establishing and releasing EPS bearers (4G) / PDU sessions (5G)
     - Configuring Quality of Service (QoS) parameters (e.g., latency, priority, and guaranteed bit rate)
     - Coordinating radio resource usage with the RAN (e.g., determining which users receive higher priority)
 
-3. **Traffic Steering**
+3. **Traffic Routing**
 
     The core network determines “where packets should go”. For example:
 
@@ -30,16 +30,16 @@ The functions of the core network can be broadly grouped into several aspects:
 
     Telecom operators need to know how much data each user consumes, how long calls last, and whether certain value-added services are used, in order to perform charging and settlement. The core network:
 
-    - Collects usage information (traffic, time, events)
-    - Generates charging records
-    - Interacts with charging systems to support online and offline charging
+    - Collecting usage information (traffic, time, events)
+    - Generating charging records
+    - Interacting with charging systems to support online and offline charging
 
-In summary, the core network serves the same essential purpose across 2G through 5G: it **identifies subscribers, allocates resources, determines routing,** and **enables charging**. The difference across generations lies in the continuous evolution of protocols, interfaces, and functional decomposition, which allow the core network to support more diverse services, finer-grained QoS, and greater flexibility and programmability.
+In summary, the core network serves the same essential purpose across 2G through 5G: it **identifies subscribers, allocates resources, determines traffic routing,** and **charging**. The difference across generations lies in the continuous evolution of protocols, interfaces, and functional decomposition, which allow the core network to support more diverse services, finer-grained QoS, and significantly higher levels of flexibility and programmability.
 
 ## 1.2 4G Evolved Packet Core (EPC)
 
 ### 1.2.1 EPC Architecture Overview
-In 4G systems, the Evolved Packet Core (EPC) serves as the central component that connects the radio access network (eNodeB) with external networks such as the Internet and enterprise private networks. The EPC consists of several key network elements, including the HSS, MME, S-GW, P-GW, and the eNodeB, we will introduce them in the following content.
+In 4G systems, the EPC (Evolved Packet Core) serves as the central component that connects the radio access network (eNodeB) with external networks such as the Internet and enterprise private networks. The EPC consists of several key network functions, including the HSS, MME, S-GW, P-GW, and the eNodeB, we will introduce them in the following content.
 
 ![epc](../../image/part1/epc.png)
 
@@ -80,9 +80,9 @@ In 4G systems, the Evolved Packet Core (EPC) serves as the central component tha
 
 Although 2G, 3G, and 4G core networks successfully support voice, messaging, and mobile broadband services, their architectures and functional capabilities exhibit several fundamental limitations. These constraints make it difficult for legacy core networks to meet the **high flexibility**, **high efficiency**, and **service diversity requirements** targeted by 5G.
 
-- Closed Architecture and Tightly Coupled Network Elements
+- Closed Architecture and Tightly Coupled Network Functions
 
-    - Core functions are implemented within a small number of large network elements (e.g., SGSN/GGSN or MME/S-GW/P-GW), resulting in tight coupling between components.
+    - Core functions are implemented within a small number of large network functions (e.g., SGSN/GGSN or MME/S-GW/P-GW), resulting in tight coupling between components.
     - Introducing new features or optimizing data paths is often constrained by vendor-specific implementations and rigid interfaces, limiting architectural flexibility.
 
 - Incomplete Separation of Control and User Planes
@@ -142,7 +142,7 @@ To meet the requirements described above, 3GPP defined several fundamental desig
 
 - **Introduction of SBA (Service-Based Architecture)**
 
-    The 5GC is no longer centered around a “single, monolithic network element.” Instead, core functionalities are decomposed into multiple network functions (NFs), such as the AMF, SMF, UPF, UDM, and PCF, which interact with each other through **HTTP + JSON / REST-style** interfaces.  
+    The 5GC is no longer centered around a “single, monolithic network function.” Instead, core functionalities are decomposed into multiple network functions (NFs), such as the AMF, SMF, UPF, UDM, and PCF, which interact with each other through **HTTP + JSON / REST-style** interfaces.  
     Each NF exposes clearly defined services, and other NFs can discover and invoke these services by name. This design:
 
     - Enables independent development, upgrade, and scaling of network functions
@@ -155,7 +155,7 @@ To meet the requirements described above, 3GPP defined several fundamental desig
     As a result:
 
     - The control plane can be centrally deployed, enabling unified management of control logic and policies 
-    - User plane functions (UPFs) can be flexibly distributed toward the network edge or across different geographic locations, shortening data paths and reducing latency  
+    - User plane (UPF) can be flexibly distributed toward the network edge or across different geographic locations, shortening data paths and reducing latency  
     - Control plane and user plane resources can be independently scaled in or out based on traffic characteristics and service requirements
 
 - **Cloud-Native Design and Network Slicing**
@@ -171,7 +171,7 @@ Through the adoption of SBA, CUPS, and cloud-native network slicing, the 5G core
 
 ## 1.4 Chapter Summary
 
-This chapter begins by addressing the question of “what the core network is” and explaining its role in mobile communication systems. The core network elements as the “brain” of the network, responsible for subscriber authentication, resource allocation and management, traffic routing decisions, and support for charging and accounting. Then the chapter reviews the overall architecture of the 4G EPC and the responsibilities of its key network elements, including the HSS, MME, S-GW, P-GW, and eNodeB. It also highlights the major limitations of 2G/3G/4G core networks, such as closed architectures, incomplete separation of control and user planes, limited service diversity, and constraints in areas such as scalability and cloud-native capabilities.
+This chapter begins by addressing the question of “what the core network is” and explaining its role in mobile communication systems. The core network functions as the “brain” of the network, responsible for subscriber authentication, resource allocation and management, traffic routing decisions, and support for charging and accounting. Then the chapter reviews the overall architecture of the 4G EPC and the responsibilities of its key network functions, including the HSS, MME, S-GW, P-GW, and eNodeB. It also highlights the major limitations of 2G/3G/4G core networks, such as closed architectures, incomplete separation of control and user planes, limited service diversity, and constraints in areas such as scalability and cloud-native capabilities.
 
 Building on this background, the chapter summarizes the motivations and design principles behind the emergence of the 5G Core (5GC). To support diverse service scenarios such as **eMBB**, **URLLC**, and **mMTC**, as well as the differentiated requirements of vertical industries and enterprise private networks, the 5GC adopts a service-based architecture (SBA), a more thorough separation of control and user planes (CUPS), and cloud-native design with network slicing. These design choices enable the core network to evolve from a traditional, closed telecom system into a programmable and highly customizable digital infrastructure. In the following chapters, this historical context serves as the foundation for a more systematic introduction to the functions and architecture of the 5G core network from a 3GPP perspective.
 
