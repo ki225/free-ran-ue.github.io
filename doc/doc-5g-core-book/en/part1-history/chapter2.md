@@ -105,6 +105,58 @@ From a user’s point of view, when a smartphone(UE) accesses the network, the d
 - **5GC（5G Core）**: handles registration, identity management, routing, policy control, and charging
 - **DN（Data Network）**: such as the Internet, enterprise private networks, public cloud VPCs, or IMS networks
 
+### 2.2.2 Division of Responsibilities Between the RAN and the Core
+
+- **The RAN acts like an “access station”**
+
+    - Managing radio resources: who is allowed to transmit, how much data can be transmitted, and which modulation and coding schemes are used
+    - Packaging each UE’s user data and forwarding it toward the core network
+
+- **The Core acts like a “command center and traffic dispatcher”**
+
+    - Determining the UE’s identity, whether it is authorized to access the network, and which path its traffic should follow
+    - Deciding which Data Network (DN) the packets should be routed to, and what QoS and policy rules should be applied
+
+This division of responsibilities is conceptually similar to that of the 4G era. However, in 5G, the separation between the control plane and the user plane is made much more explicit, enabling greater optimization and more flexible deployment options.
+
+## 2.3 SBA（Service-Based Architecture）
+
+In the 4G EPC, many network elements communicate with each other using **Diameter** or other traditional telecom protocols.
+With the 5G core network, 3GPP introduced a major architectural shift: **the adoption of a Service-Based Architecture (SBA) built on HTTP and JSON**.
+
+### 2.3.1 Why Move from Diameter to HTTP + JSON?
+
+There are several key reasons for this transition:
+
+- Bringing telecom networks closer to the IT and cloud technology stack, making it easier to integrate existing tools and ecosystems
+- Making interactions between network elements more “microservices-like”: each network element exposing a clearly defined set of APIs
+- Offering advantages over Diameter in terms of multiplexing, latency characteristics, and deployment flexibility
+
+For developers and researchers, this also means that parts of the 5G core network logic can be understood and implemented using familiar web technologies.
+
+### 2.3.2 What Is a Service-Based Interface (SBI)?
+
+In an SBA, each Network Function (NF) exposes its capabilities as services, for example:
+
+- AMF provides services related to UE registration and access management
+- SMF provides services related to PDU session management
+- PCF provides services related to policy control
+
+These services communicate through a unified conceptual interface known as the **Service-Based Interface (SBI)**. In practice, an SBI is implemented as a set of HTTP + JSON APIs.
+
+> [!Tip]
+> You can think of SBA as follows: “Each network function in the 5G core acts as a service provider, and they invoke each other using REST-style APIs.”
+
+### 2.3.3 Advantages of SBA
+
+Compared to traditional point-to-point, interface-specific interactions between network elements, SBA offers several clear advantages:
+
+- **Scalability**: When the load on a particular NF increases, additional instances can be deployed. As long as they are registered with the NRF, they can be used dynamically.
+- **Replaceability**: Multiple implementations or versions of the same NF can coexist, potentially from different vendors, with compatibility achieved through standardized APIs.
+- **Interoperability**: By adhering to common API specifications, different implementations can interoperate more easily, reducing vendor lock-in.
+- **Testability**: Developers and testers can validate individual NFs or specific APIs in isolation, without having to deploy the entire system end to end.
+
+
 <div class="chapter-nav">
   <a href="../../part2-free5gc/chapter3/" class="nav-btn nav-next" title="Next：free5GC Overall Architecture and Module Introduction">
     <span class="arrow"></span>
