@@ -1,7 +1,7 @@
 # Chapter 1: From 4G to 5G — Evolution of Core Network Architecture
 
 ## 1.1 What is core network (CN)?
-We can think of the core network as “the brain of a telecommunications system.” It is responsible for making decisions and coordinating actions between user equipment (smartphones, UE) () and the external world (e.g., the Internet, enterprise private networks, and other operators’ networks). When a phone powers on, registers, accesses the Internet, makes a call, or uses apps, most of the key control logic behind these actions is handled by the core network.
+We can think of the core network as “the brain of a telecommunications system.” It is responsible for making decisions and coordinating actions between user equipment (smartphones, UE) and the external world (e.g., the Internet, enterprise private networks, and other operators’ networks). When a phone powers on, registers, accesses the Internet, makes a call, or uses apps, most of the key control logic behind these actions is handled by the core network.
 
 The functions of the core network can be broadly grouped into several aspects:
 
@@ -24,7 +24,7 @@ The functions of the core network can be broadly grouped into several aspects:
     - Which P-GW (4G) / UPF (5G) Internet traffic should be forwarded to
     - Whether specific services (e.g., VoLTE, VoNR, IMS) should be delivered to dedicated application servers
 
-    In 5G architecture, this also involves designs such as the **Uplink Classifier (UL CL)** and **traffic steering**.
+    In 5G architecture, this also involves designs such as the **uplink classifier (UL CL)** and **traffic steering**.
 
 4. **Charging**
 
@@ -34,7 +34,7 @@ The functions of the core network can be broadly grouped into several aspects:
     - Generating charging records
     - Interacting with charging systems to support online and offline charging
 
-In summary, the core network serves the same essential purpose across 2G through 5G: it **identifies subscribers, allocates resources, determines traffic routing,** and **charging**. The difference across generations lies in the continuous evolution of protocols, interfaces, and functional decomposition, which allow the core network to support more diverse services, finer-grained QoS, and significantly higher levels of flexibility and programmability.
+In summary, the core network serves the same essential purpose across 2G through 5G: it **“identifies subscribers, allocates resources, determines traffic routing,”** and **charging**. The difference across generations lies in the continuous evolution of protocols, interfaces, and functional decomposition, which allow the core network to support more diverse services, finer-grained QoS, and significantly higher levels of flexibility and programmability.
 
 ## 1.2 4G Evolved Packet Core (EPC)
 
@@ -45,7 +45,7 @@ In 4G systems, the EPC (Evolved Packet Core) serves as the central component tha
 
 - HSS (Home Subscriber Server)
 
-    - Storing subscriber information, such as International Mobile Subscriber Identity (IMSI), Mobile Station International Subscriber Directory Number (MSISDN), Service Permissions, and roaming permissions.
+    - Storing subscriber information, such as IMSI, MSISDN, Service Permissions, and roaming permissions.
     - Maintaining authentication keys and security parameters used during UE authentication.
     - Providing subscription and roaming information to the MME to support mobility and access control decisions.
 
@@ -54,7 +54,7 @@ In 4G systems, the EPC (Evolved Packet Core) serves as the central component tha
     - Handling UE attach and detach procedures.
     - Managing mobility, including tracking the UE’s serving eNodeB and coordinating handovers.
     - Authenticating subscribers through interaction with the HSS and determining whether network access is permitted.
-    - Coordinating with the S-GW and P-GW during data bearer establishment to create the appropriate EPS bearers.
+    - Coordinating with the S-GW / P-GW during data bearer establishment to create the appropriate EPS bearers.
 
 - S-GW (Serving Gateway)
 
@@ -87,7 +87,7 @@ Although 2G, 3G, and 4G core networks successfully support voice, messaging, and
 
 - Incomplete Separation of Control and User Planes
 
-    - Although 4G EPC introduces a logical separation between the control plane (MME) and the user plane (S-GW/P-GW), implementation and deployment often remain based on integrated appliance style.
+    - Although 4G EPC introduces a logical separation between the control plane (MME) and the user plane (S-GW/P-GW), implementation and deployment often remain based on “integrated appliance” style.
     - This limits support for advanced scenarios such as centralized control, distributed traffic breakout, and mobile edge computing (MEC)
 
 - Limited Service Diversity and QoS Flexibility
@@ -98,24 +98,24 @@ Although 2G, 3G, and 4G core networks successfully support voice, messaging, and
 - Hardware-Constrained Scalability and Deployment Pattern
 
     - Legacy core networks are commonly deployed on dedicated hardware or virtual machines, favoring vertical scaling (scale-up) over horizontal scaling (scale-out).
-    - This makes it difficult to rapidly adapt to traffic surges or temporary events, such as concerts or large sporting events, and limits the feasibility of elastic, on-demand cloud-native deployments.
+    - This makes it difficult to rapidly adapt to traffic surges or temporary events (e.g., concerts or large sporting events), and limits the feasibility of “elastic, on-demand” cloud-native deployments.
 
 - Insufficient Support for Cloud-Native Design and Network Slicing
 
-    - The design of 2G, 3G, and 4G core networks assumes a single shared network serving all users, rather than a multi-tenant, multi-slice environment.
+    - The design of 2G / 3G / 4G core networks assumes a single shared network serving all users, rather than a “multi-tenant, multi-slice environment.”
     - Customizing core network behavior or allocating isolated resource slices for different enterprises or industries is costly, inflexible, and difficult to automate.
 
-As a result of the limitations described above, when mobile networks evolved from a single, best-effort public service toward diverse vertical and industry-specific use cases, existing 2G/3G/4G core network architectures increasingly struggled to meet these demands. This evolution became a key motivation for the redesign of the 5G Core (5GC) and the introduction of service-based architecture (SBA), cloud-native principles, and network slicing.
+As a result of the limitations described above, when mobile networks evolved from a “single, best-effort public service” toward “diverse vertical and industry-specific use cases,” existing 2G/3G/4G core network architectures increasingly struggled to meet these demands. This evolution became a key motivation for the redesign of the 5G Core (5GC) and the introduction of service-based architecture (SBA), cloud-native principles, and network slicing.
 
 ## 1.3 Requirements and Design Principles of the 5G Core (5GC)
 
 ### 1.3.1 Requirements of the 5G Core Network
 
-5G is not simply a faster version of 4G. Instead, it is designed to simultaneously support three fundamentally different service categories, which directly shape the architectural design of the 5G Core (5GC).
+5G is not simply a “faster version” of 4G. Instead, it is designed to simultaneously support three fundamentally different service categories, which directly shape the architectural design of the 5G Core (5GC).
 
 - **eMBB (enhanced Mobile Broadband)**
 
-    The primary objective of eMBB is to deliver higher data rates and significantly increased capacity, enabling applications such as 4K/8K video streaming, AR/VR, and cloud gaming.
+    The primary objective of eMBB is to deliver “higher data rates and significantly increased capacity,” enabling applications such as 4K/8K video streaming, AR/VR, and cloud gaming.
 
     From a core network perspective, this requires the ability to handle large volumes of high-bandwidth traffic while maintaining stable QoS (e.g., throughput, latency, and packet loss performance) under heavy load conditions.
 
@@ -137,7 +137,7 @@ Beyond these three service categories, **the rapid proliferation of diverse IoT 
 - The traditional “one network serving all users” model is no longer sufficient; the network must support rapid creation of customized network slices and policies tailored to specific customers and applications
 - The core network must integrate more seamlessly with IT / Cloud environments, enabling automated deployment, elastic scaling, and DevOps-oriented operational models
 
-Together, these requirements drive the evolution of the 5G Core from traditional telecom appliance-based systems toward a cloud-native, service-based architecture.
+Together, these requirements drive the evolution of the 5G Core from “traditional telecom appliance-based systems” toward a “cloud-native, service-based architecture.”
 
 ### 1.3.2 Design Principles of the 5G Core Network
 
