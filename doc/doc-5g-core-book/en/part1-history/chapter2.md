@@ -2,12 +2,12 @@
 
 In Chapter 1, we started by discussing “why a core network is needed” and “the evolution and limitations of the 4G EPC.”
 From this chapter onward, we will adopt a **3GPP-centric perspective** to examine the design of the entire 5G System (5GS), covering:
-how standards are defined, the overall system architecture, and the meaning of commonly referenced 5G concepts such as SBA and interfaces (N1/N2/N3).
+how standards are defined, the overall system architecture, and the meaning of commonly referenced 5G concepts such as SBA and interfaces (N1/N2/N3…).
 
 > [!Important]
-> The goal of this chapter is not to make you memorize all the specification numbers, but to help you build a **mental model** of the system:  
+> The goal of this chapter is not to make you memorize all the specification numbers, but to help you first build a **sense of the overall structure**:
 >
-> understanding “what the overall 5G system looks like” and “how the control and user planes are separated.” Detailed discussions of key concepts and the concrete roles of each Network Function (NF) will be covered later.
+> “what the overall 5G system looks like” and “how the control and user planes are separated.” Detailed discussions of key concepts and the concrete roles of each Network Function (NF) will be covered later.
 
 ## 2.1 Overview of 3GPP and 5G System Standardization
 
@@ -28,12 +28,12 @@ Within 3GPP, the work is broadly divided into three major domains:
 - **RAN (Radio Access Network)**
 
     Focuses on “radio access technologies,” specifically the NR (New Radio) protocol stack, signaling design, and air-interface specifications.
-    The commonly referenced **38.xxx series** (e.g., TS 38.300 and TS 38.331) are the specifications that define the RAN.
+    The commonly referenced 38.xxx series (e.g., TS 38.300 and TS 38.331) are the specifications that define the RAN.
 
 - **CT (Core Network & Terminals)**
 
     Responsible for “core network and terminal signaling protocols.”
-    This includes how the UE interacts with the core network, the definition of NAS and NGAP signaling, and the detailed procedures for call and session handling.
+    This includes how the UE interacts with the core network, the definition of NAS / NGAP signaling, and the detailed procedures for call and session handling.
 
 > [!Tip]
 > A simple way to remember this:
@@ -42,23 +42,23 @@ Within 3GPP, the work is broadly divided into three major domains:
 > - RAN: defines how radio transmission works
 > - CT: defines how signaling flows and how procedures are executed
 
-### 2.1.2 The Roles of TS 23.501 / 23.502 / 23.503
+### 2.1.2 The Roles of 23.501 / 23.502 / 23.503
 
 Among the specifications related to the 5G core network, the following three Technical Specifications (TS) are referenced most frequently:
 
-- **TS 23.501 – System Architecture**
+- **TS 23.501 - System Architecture**
 
-    This document defines the overall architecture of the 5G system, including:
+    This document defines “the overall architecture of the 5G system,” including:
 
     - The network functions (NFs), such as AMF, SMF, UPF, and others
     - The interfaces between them (N1, N2, N3, N4, N6, Nn, etc.)
     - How different service scenarios (eMBB / URLLC / mMTC) are supported architecturally
 
-    TS 23.501 can be thought of as “the architecture blueprints of 5G.”
+    23.501 can be thought of as “the architecture blueprints of 5G.”
 
-- **TS 23.502 – Procedures**
+- **TS 23.502 - Procedures**
 
-    It describes **how the system operates when events occur**, such as:
+    It describes “how the system operates when events occur”, such as:
 
     - UE registration procedures
     - Establishment and release of PDU Sessions
@@ -72,7 +72,7 @@ Among the specifications related to the 5G core network, the following three Tec
 
 ### 2.1.3 The 38.x Series and RAN Signaling
 
-The specifications discussed above are primarily core-network-oriented. On the radio access (RAN) side of 5G, you will frequently encounter documents starting with 38.xxx, for example:
+The specifications discussed above are primarily core-network-oriented. On the radio access (RAN) side of 5G, you will frequently encounter documents starting with **38.xxx**, for example:
 
 - **TS 38.300**: Describes the overall architecture of NR and NG-RAN
 - **TS 38.331**: Defines the RRC (Radio Resource Control) protocol, i.e., the control signaling between the UE and the gNB
@@ -82,19 +82,20 @@ These documents primarily address “UE ↔ gNB (base station)” interactions. 
 
 ### 2.1.4 5GC + NR = 5GS
 
-According to 3GPP definitions, the 5G System (5GS) consists of two main parts:
+According to 3GPP definitions, the “5G System (5GS)” consists of two main parts:
 
 - **5GC (5G Core)**: the primary focus of this book
-- **NR (New Radio)/ NG-RAN**: the new radio access network (including gNB)
+- **NR (New Radio) / NG-RAN**: the new radio access network (including gNB)
 
 Together, these form a complete 5G system.
-Therefore, the 5G System (5GS) can be understood as “the end-to-end network formed by the 5G Core (5GC) and NR.”
+
+Therefore, the 5G System (5GS) can be understood as **“the end-to-end network formed by the 5G Core (5GC) and NR.”**
 
 ## 2.2 5G System Overview (5GS Overview)
 
 Before diving into details, let’s first look at the overall structure of the 5G system from a high-level perspective.
 
-### 2.2.1 UE – RAN – 5GC – DN: The Path from Device to Service
+### 2.2.1 UE - RAN - 5GC - DN: The Path from Device to Service
 
 From a user’s point of view, when a smartphone(UE) accesses the network, the data path typically goes through the following layers:
 
@@ -145,7 +146,7 @@ In an SBA, each Network Function (NF) exposes its capabilities as services, for 
 These services communicate through a unified conceptual interface known as the **Service-Based Interface (SBI)**. In practice, an SBI is implemented as a set of HTTP + JSON APIs.
 
 > [!Tip]
-> You can think of SBA as follows: “Each network function in the 5G core acts as a service provider, and they invoke each other using REST-style APIs.”
+> You can think of SBA as follows: “each network function in the 5G core acts as a service provider, and they invoke each other using REST-style APIs.”
 
 ### 2.3.3 Advantages of SBA
 
@@ -174,7 +175,7 @@ The control plane is primarily responsible for “signaling and coordination,”
 - **N2: RAN ↔ 5GC (NGAP)**
 
     - This is the control interface between the gNB and the 5GC, specifically the AMF.
-    - It uses the **NGAP** protocol, which handles functions such as UE context setup, handover control, and PDU Session–related control signaling.
+    - It uses the **NGAP** protocol, which handles functions such as UE context setup, handover control, and PDU Session-related control signaling.
 
 - **N4: SMF ↔ UPF (PFCP)**
 
@@ -212,22 +213,22 @@ Registration can be viewed as the “registration / login procedure” in 5G. At
 4. **Registration Complete**: After all required exchanges and configurations are completed, the UE responds with Registration Complete to indicate that it has successfully “logged in” to the 5G network.
 
 > [!Tip]
-> The **registration** procedure is the first access procedure initiated by the UE toward the core network when it powers on or exits airplane mode.
+> The **registration** procedure is the first **access** procedure initiated by the UE toward the core network when it powers on or exits airplane mode.
 
 ### 2.5.2 PDU Session Procedure
 
-In 4G, we often refer to **bearers**. In 5G, the corresponding core concept is the **PDU session**, which you can think of as “a **logical connection** between the UE and a specific Data Network (DN).”
+In 4G, we often refer to **Bearers**. In 5G, the corresponding core concept is the **PDU session**, which you can think of as “a **logical connection** between the UE and a specific Data Network (DN).”
 
 At a high level, the procedure works as follows:
 
 1. **UE requests PDU session establishment**: When the UE wants to access the Internet or connect to a specific service, it sends a PDU Session Establishment Request.
 2. **SM control-plane decisions**: The SMF in the core network determines which UPF and which DN the PDU session should be associated with, as well as the QoS parameters to be applied.
-3. **User-plane path establishment**: The user-plane path of the PDU session is constructed through N3 (RAN ↔ UPF) and N6 (UPF ↔ DN).
+3. **User-plane GTP-U path establishment**: The user-plane GTP-U path for the PDU session is constructed through N3 (RAN ↔ UPF) and N6 (UPF ↔ DN).
 
 Afterward, the UE’s data packets are forwarded along this PDU session. A single UE may have multiple PDU sessions simultaneously, each corresponding to a different service or network.
 
 > [!Tip]
-> Establishing a PDU session is essentially about creating a logical connection from the UE to a Data Network (DN)!
+> Establishing a PDU session is essentially about creating a logical connection from the UE to a DN!
 
 ### 2.5.3 Handover Concept
 
@@ -241,7 +242,7 @@ At this level, it is sufficient to understand two key aspects:
 
 ## 2.6 QoS Flows and 5QI: Differences Between 5G and 4G QoS Models
 
-Quality of Service (QoS) is a fundamental topic in mobile networks. In 4G, QoS is commonly discussed in terms of bearers. In 5G, however, the QoS flow becomes the more central concept.
+QoS (Quality of Service) is a fundamental topic in mobile networks. In 4G, QoS is commonly discussed in terms of “bearer.” In 5G, however, the **QoS flow** becomes the more central concept.
 
 ### 2.6.1 4G Bearer vs 5G QoS Flow
 
@@ -275,7 +276,7 @@ In 5G, each QoS flow is associated with several key attributes (which will be di
 - **MBR (Maximum Bit Rate)**: 
 
     - As the name suggests, this defines “the maximum bandwidth,” and it is often used in conjunction with GBR.
-    - Put simply: GBR specifies “at least this much bandwidth,” while MBR specifies “no more than this much bandwidth.”
+    - Put simply: **GBR specifies “at least this much bandwidth,” while MBR specifies “no more than this much bandwidth.”**
     - By enforcing MBR, the system prevents a single flow from consuming excessive resources when capacity is abundant, thereby preventing other users or services from being impacted.
 
 Through this design, 5G can flexibly support diverse service scenarios such as eMBB, URLLC, and mMTC. Even within a single PDU session, different types of traffic can be treated with different QoS levels.
@@ -288,7 +289,7 @@ Security is a fundamental aspect of 5G design. However, this chapter does not di
 
 5G inherits and extends the AKA framework used in previous generations:
 
-- It verifies the identities of both the UE and the network through a challenge–response mechanism.
+- It verifies the identities of both the UE and the network through a challenge-response mechanism.
 - At the same time, it derives cryptographic keys that are later used to protect signaling and data.
 
 You can think of this process as: “both sides first confirm that I really am who I claim to be and that you really are who you claim to be, and then jointly decide which keys will be used to lock the door.”
@@ -306,7 +307,7 @@ To better protect user privacy, 5G introduces the following identifiers:
 In this chapter, we took a bird’s-eye view of the 5G system and core network from a 3GPP perspective:
 
 - Understood the **role of 3GPP** and the division of responsibilities among SA, RAN, and CT in 5G standardization
-- Clarified the roles of **TS 23.501 / 23.502 / 23.503** in defining architecture, procedures, and policy
+- Clarified the roles of **23.501 / 23.502 / 23.503** in defining architecture, procedures, and policy
 - Examined the overall structure of **5GS = 5GC + NR**, as well as the high-level relationship between UE, RAN, 5GC, and DN.
 - Established a foundational understanding of **the separation between the control plane (N1 / N2 / N4 / Nn) and the user plane (N3 / N6)**
 - Gained an initial understanding of the **Service-Based Architecture (SBA)** and the role of the Service-Based Interface (SBI)
