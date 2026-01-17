@@ -6,7 +6,7 @@
     <div class="author-info">
       <h2><a href="https://alonza0314.github.io/">杜峯 Alonza</a></h2>
       <div class="exp">
-        <p>Intern @ Saviah</p>
+        <p>SE @ Saviah</p>
         <p>Committer @ free5GC</p>
         <p>PTRA @ Academia Sinica</p>
         <p>MS @ NYCU</p>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="description">
-    <p>Hi 我是杜峯，目前是 NYCU 的碩士生。主要專注於 5G 核心網路（free5GC）和 RAN/UE 模擬器的開發與研究。</p>
+    <p>Hi 我是杜峯，目前為軟體工程師任職於 <a href="https://www.saviah.com/en">Saviah Technologies</a>，同時也是 <a href="https://free5gc.org">free5GC</a> 的主要維護者。</p>
     <p>在學習和研究 5G 的過程中，我發現許多初學者都面臨著同樣的困境：無從下手。因此，我決定整理自己的學習過程和實戰經驗，寫成這本書，希望幫助更多人快速進入 5G 的世界。</p>
   </div>
 </div>
