@@ -268,12 +268,12 @@ In 5G, each QoS flow is associated with several key attributes (which will be di
     - Priority level
     - Packet loss tolerance
 
-- **GBR / Non-GBR**: 
+- **GBR / Non-GBR**:
 
     - GBR (Guaranteed Bit Rate): Ensures that a minimum bit rate is guaranteed for the flow.
     - Non-GBR: Does not guarantee a specific bit rate, and most general data services fall into this category.
 
-- **MBR (Maximum Bit Rate)**: 
+- **MBR (Maximum Bit Rate)**:
 
     - As the name suggests, this defines “the maximum bandwidth,” and it is often used in conjunction with GBR.
     - Put simply: **GBR specifies “at least this much bandwidth,” while MBR specifies “no more than this much bandwidth.”**

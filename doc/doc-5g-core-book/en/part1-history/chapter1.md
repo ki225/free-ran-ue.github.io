@@ -1,6 +1,7 @@
 # Chapter 1: From 4G to 5G — Evolution of Core Network Architecture
 
 ## 1.1 What is core network (CN)?
+
 We can think of the core network as “the brain of a telecommunications system.” It is responsible for making decisions and coordinating actions between user equipment (smartphones, UE) and the external world (e.g., the Internet, enterprise private networks, and other operators’ networks). When a phone powers on, registers, accesses the Internet, makes a call, or uses apps, most of the key control logic behind these actions is handled by the core network.
 
 The functions of the core network can be broadly grouped into several aspects:
@@ -8,7 +9,7 @@ The functions of the core network can be broadly grouped into several aspects:
 1. **User Registration**
 
     The core network identifies “who you are” and checks a set of subscriber-related conditions. For example, whether you are a legitimate subscriber, whether your phone number is valid, whether there are unpaid bills, and whether roaming is permitted, among others. In 4G/5G systems, this typically involves **authentication**, **registration/attach**, and **session/context** for each subscriber.
-    
+
 2. **Resource Management**
 
     When a user starts transmitting data (e.g., watching YouTube or joining a Teams meeting) or sets up a voice call, the core network allocates appropriate resources for the traffic. The Core Network is responsible for:
@@ -39,6 +40,7 @@ In summary, the core network serves the same essential purpose across 2G through
 ## 1.2 4G Evolved Packet Core (EPC)
 
 ### 1.2.1 EPC Architecture Overview
+
 In 4G systems, the EPC (Evolved Packet Core) serves as the central component that connects the radio access network (eNodeB) with external networks such as the Internet and enterprise private networks. The EPC consists of several key network functions, including the HSS, MME, S-GW, P-GW, and the eNodeB, and we are going to introduce them in the following content.
 
 ![epc](../../image/part1/epc.png)
@@ -122,13 +124,13 @@ As a result of the limitations described above, when mobile networks evolved fro
 - **URLLC (Ultra-Reliable Low Latency Communications)**
 
     Targets use cases such as autonomous driving, remote surgery, and industrial control systems, which demand “millisecond-level or even sub-millisecond latency” combined with extremely high reliability.
-    
+
     To meet these requirements, the core network must minimize end-to-end data paths and support the placement of user plane functions closer to the network edge (MEC), while also providing fine-grained prioritization and enhanced protection mechanisms.
 
 - **mMTC (massive Machine Type Communications)**
 
     mMTC addresses scenarios involving massive numbers of IoT devices, such as smart meters, sensors, and wearable devices. Although each device typically generates low traffic volumes, the “device density is extremely high.”
-    
+
     The core network must therefore support high-density device registration, low-cost connectivity, and connection models optimized for long idle periods and intermittent data transmission (e.g., energy-efficient and power-saving mechanisms introduced in 5G).
 
 Beyond these three service categories, **the rapid proliferation of diverse IoT and vertical industry services** has introduced new requirements for the 5G Core (5GC):
@@ -146,32 +148,32 @@ To meet the requirements described above, 3GPP defined several fundamental desig
 - **Introduction of SBA (Service-Based Architecture)**
 
     The 5GC is no longer centered around a “single, monolithic network function.” Instead, core functionalities are decomposed into multiple network functions (NFs), such as the AMF, SMF, UPF, UDM, and PCF, which interact with each other through **HTTP + JSON / REST-style** interfaces.  
-    
+
     Each NF exposes clearly defined services, and other NFs can discover and invoke these services by name. This design:
 
     - Enables independent development, upgrade, and scaling of network functions
-    - Facilitates the adoption of microservices and containerization technologies (e.g., Kubernetes)    
+    - Facilitates the adoption of microservices and containerization technologies (e.g., Kubernetes)
     - Brings telecom network architecture closer to conventional IT and cloud system design paradigms
 
 - **Support for CUPS (Control and User Plane Separation)**
 
-    Although CUPS was already introduced in the 4G EPC, the separation between the control plane (e.g., AMF, SMF) and the user plane (UPF) is more thoroughly realized in the 5GC. 
-    
+    Although CUPS was already introduced in the 4G EPC, the separation between the control plane (e.g., AMF, SMF) and the user plane (UPF) is more thoroughly realized in the 5GC.
+
     As a result:
 
-    - The control plane can be centrally deployed, enabling unified management of control logic and policies 
+    - The control plane can be centrally deployed, enabling unified management of control logic and policies
     - User plane (UPF) can be flexibly distributed toward the network edge or across different geographic locations, shortening data paths and reducing latency  
     - Control plane and user plane resources can be independently scaled in or out based on traffic characteristics and service requirements
 
 - **Cloud-Native Design and Network Slicing**
 
-    From the outset, the 5GC is designed to operate in cloud environments, with support for containerization, microservices, and automated orchestration. 
-    
+    From the outset, the 5GC is designed to operate in cloud environments, with support for containerization, microservices, and automated orchestration.
+
     Building on this foundation, the 5GC introduces the concept of **Network Slicing**, whereby multiple end-to-end logical “virtual networks” are created on top of a shared physical infrastructure. Each network slice can have:
 
     - Different combinations and configurations of network functions
     - Distinct QoS policies, security levels, and management logic
-    - Alignment with specific customers or industry scenarios (e.g., one slice dedicated to mMTC and another to URLLC-based industrial control) 
+    - Alignment with specific customers or industry scenarios (e.g., one slice dedicated to mMTC and another to URLLC-based industrial control)
 
 Through the adoption of SBA, CUPS, and cloud-native network slicing, the 5G core network represents a significant evolution from previous generations. It transitions from a “single-purpose, inflexible telecom core network” toward a **“programmable, sliceable, and highly customizable general-purpose digital infrastructure,”** allowing for further innovative applications.
 
@@ -180,7 +182,6 @@ Through the adoption of SBA, CUPS, and cloud-native network slicing, the 5G core
 This chapter begins by addressing the question of “what the core network is” and explaining its role in mobile communication systems. The core network functions as the “brain” of the network, responsible for subscriber authentication, resource allocation and management, traffic routing decisions, and support for charging and accounting. Then the chapter reviews the overall architecture of the 4G EPC and the responsibilities of its key network functions, including the HSS, MME, S-GW, P-GW, and eNodeB. It also highlights the major limitations of 2G/3G/4G core networks, such as closed architectures, incomplete separation of control and user planes, limited service diversity, and constraints in areas such as scalability and cloud-native capabilities.
 
 Building on this background, the chapter summarizes the motivations and design principles behind the emergence of the 5G Core (5GC). To support diverse service scenarios such as **eMBB**, **URLLC**, and **mMTC**, as well as the differentiated requirements of vertical industries and enterprise private networks, the 5GC adopts a service-based architecture (SBA), a more thorough separation of CUPS, and cloud-native design with network slicing. These design choices enable the core network to evolve from a traditional, closed telecom system into a programmable and highly customizable digital infrastructure. In the following chapters, this historical context serves as the foundation for a more systematic introduction to the functions and architecture of the 5G core network from a 3GPP perspective.
-
 
 <div class="chapter-nav">
   <a href="../chapter2/" class="nav-btn nav-next" title="Next: 5G Core Network Overview from 3GPP Perspective">
