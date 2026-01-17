@@ -11,7 +11,6 @@ When first stepped into the 5G world, everything felt extremely abstract. The st
 
 For many beginners, reading 3GPP specifications or trying to make sense of slide decks often comes with the same pain points:
 
-
 - **Too many acronyms**: You see a long list of abbreviations, but can’t immediately map them to what they actually do.
 - **Concepts feel too abstract**: You may know the names of network functions, but struggle to connect them to real packets and real procedures.
 - **3GPP specs are massive**: The documents are extremely detailed and complex, making it hard to know where to start.
@@ -76,7 +75,7 @@ For all lab steps in this book, we aim to ensure:
 - **Step-by-step explanations**: We don’t just give commands, we explain why we do it and which network function or procedure it corresponds to.
 
 <div class="chapter-nav">
-  <a href="author/" class="nav-btn nav-next" title="Next：About the Author">
+  <a href="author/" class="nav-btn nav-next" title="Next: About the Author">
     <span class="arrow"></span>
   </a>
 </div>
