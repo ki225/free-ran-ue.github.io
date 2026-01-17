@@ -68,7 +68,7 @@
 
 - **free-ran-ue**：本專案提供的 RAN/UE 模擬器  
 
-    原始碼與文件位於 [GitHub](https://github.com/Alonza0314/free-rna-ue)。
+    原始碼與文件位於 [GitHub](https://github.com/free-ran-ue/free-ran-ue)。
 
 文中所有實驗步驟都盡量做到：
 
