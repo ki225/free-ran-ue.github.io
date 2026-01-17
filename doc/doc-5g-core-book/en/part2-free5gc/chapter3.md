@@ -103,7 +103,7 @@ Based on the current free5GC implementation aligned with Release 17, the main st
 
 From this directory structure, we can roughly see how an NF is composed at the code level:
 
-- `cmd/main.go`: The entry point of the NF. It is mainly responsible for reading configurations, creating necessary contexts, initializing logging and various service components, and finally starting external interfaces such as the HTTP/SBI server.
+- `cmd/main.go`: The entry point of the NF. It is mainly responsible for reading configurations, creating necessary contexts, initializing logging and various service components, and finally starting external interfaces such as the HTTP / SBI server.
 - `go.mod` / `go.sum`: Go module dependency management files that record the external packages and versions used by the NF, ensuring a consistent build environment.
 - `internal/context`: Typically contains structures related to the NF’s internal “execution context” and its core business logic.
 - `internal/logger`: Encapsulates logging-related configurations and APIs, such as log levels and output formats, so that the entire NF uses a consistent logging interface.

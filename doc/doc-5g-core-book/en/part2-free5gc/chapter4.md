@@ -9,9 +9,9 @@ In the 5G Core Network, the AMF (**Access and Mobility Management Function**) is
 From a functional perspective, the AMF is mainly responsible for the following:
 
 - **Access control and registration management**: Handling UE registration, updates, and de-registration, and deciding whether a UE is allowed to access the network.
-- **Mobility and connection management**: Tracking the UE’s Tracking Area (TA), managing RRC/NAS connection states, and assisting with handover and reselection procedures.
+- **Mobility and connection management**: Tracking the UE’s Tracking Area (TA), managing RRC / NAS connection states, and assisting with handover and reselection procedures.
 - **Security and authentication coordination**: Working with NFs such as AUSF and UDM to complete UE authentication and establish security contexts, ensuring protection of signaling and data across the radio and core network domains.
-- **Session establishment coordination**: When a UE requests to establish a PDU session, the AMF selects an appropriate SMF based on policy and topology, and helps establish the context between the UE and the SMF/UPF.
+- **Session establishment coordination**: When a UE requests to establish a PDU session, the AMF selects an appropriate SMF based on policy and topology, and helps establish the context between the UE and the SMF / UPF.
 
 In terms of interfaces, the AMF connects **N1 (NAS signaling between UE and AMF)** on one side and **N2 (NGAP signaling between gNB and AMF)** on the other, while also communicating with other core NFs via various Nn interfaces over the SBA. You can therefore think of the AMF as the “front desk and traffic control center of the 5GC control plane,” translating requests from the radio side into internal core network service invocations.
 
@@ -39,15 +39,15 @@ SCTP (Stream Control Transmission Protocol) is a message-oriented transport-laye
 - **Multi-homing**: An endpoint can bind to multiple IP addresses, allowing rapid failover to a backup path in case one path fails, thereby improving reliability.
 - **Message-oriented with explicit message boundaries**: This aligns well with the “one signal per message” usage model, making telecom protocol implementation more straightforward.
 
-In practice, the gNB and the AMF each establish an SCTP connection on dedicated N2 IP/port pairs, and all subsequent NGAP messages are exchanged over this connection.
+In practice, the gNB and the AMF each establish an SCTP connection on dedicated N2 IP / port pairs, and all subsequent NGAP messages are exchanged over this connection.
 
 ### 4.2.3 NGAP
 
 NGAP (Next Generation Application Protocol) is the application-layer signaling protocol running on the N2 interface. It defines the message formats and procedures used by the gNB and AMF for various control-plane processes. Common NGAP procedures include:
 
-- Initial UE Message/Initial Context Setup: Used for context establishment during initial UE registration or PDU session setup
+- Initial UE Message / Initial Context Setup: Used for context establishment during initial UE registration or PDU session setup
 - UE Context Release: Releasing UE context between the gNB and AMF
-- Handover Preparation/Handover Resource Allocation: Coordinating signaling during UE handover between different gNBs
+- Handover Preparation / Handover Resource Allocation: Coordinating signaling during UE handover between different gNBs
 
 Within the free5GC AMF, the NGAP module is responsible for:
 
@@ -67,7 +67,7 @@ In terms of the delivery path, NAS messages are transmitted as follows:
 
 1. Between the UE and the gNB, NAS messages are encapsulated in RRC messages
 2. Upon reaching the gNB, the NAS payload is wrapped inside appropriate NGAP messages
-3. The messages are sent to the AMF over N2/SCTP, where the AMF’s NAS logic decodes and processes them
+3. The messages are sent to the AMF over N2 / SCTP, where the AMF’s NAS logic decodes and processes them
 
 > [!Note]
 > As shown in the protocol stack diagram above, NAS messages can be divided into two types:
@@ -84,13 +84,13 @@ In the free5GC implementation, the AMF startup procedure can be roughly divided 
 
 1. **Load Configuration and Initialize the Logger**
 
-    The startup program first loads the AMF configuration files (such as local IP/port, PLMN/TA lists, NRF address, SCTP parameters, etc.), and initializes the logging system accordingly to ensure consistent log output across all modules.
+    The startup program first loads the AMF configuration files (such as local IP / port, PLMN / TA lists, NRF address, SCTP parameters, etc.), and initializes the logging system accordingly to ensure consistent log output across all modules.
 
 2. **Create the AMF Context**
 
     Next, the global AMF context is created, which includes:
 
-    - Network topology and PLMN/TA configuration
+    - Network topology and PLMN / TA configuration
     - SBI client settings required for communication with other NFs
     - Internal caches, state tables, and timers
 
@@ -150,8 +150,8 @@ We start with the most common and critical procedure: **UE registration**. You c
 From the UE’s perspective, registration roughly proceeds as follows:
 
 1. When the UE powers on or enters a state requiring service, it establishes a connection with the gNB via RRC and sends a **Registration Request (NAS message)** to the gNB.  
-2. The gNB encapsulates this NAS payload into an Initial UE Message (NGAP) and forwards it to the AMF over N2/SCTP.  
-3. Upon receiving the message, the AMF evaluates the registration cause, PLMN/TA information, and UE capabilities, decides whether to accept the UE, and triggers authentication and subscription data retrieval with AUSF/UDM.
+2. The gNB encapsulates this NAS payload into an Initial UE Message (NGAP) and forwards it to the AMF over N2 / SCTP.  
+3. Upon receiving the message, the AMF evaluates the registration cause, PLMN / TA information, and UE capabilities, decides whether to accept the UE, and triggers authentication and subscription data retrieval with AUSF / UDM.
 4. Once security and subscription checks succeed, the AMF sends a Registration Accept to the UE and creates a corresponding UE context internally (including identity information, TA lists, and security parameters).
 
 As long as the UE remains in the “registered” state, the AMF handles various update and mobility-related events according to the FSM design.
@@ -159,16 +159,16 @@ As long as the UE remains in the “registered” state, the AMF handles various
 ### 4.5.2 UE PDU Session Establishment
 
 After registration, the UE must establish at least one **PDU Session** to actually access data services. This can be likened to “collecting a boarding pass and seat assignment after airport check-in.”  
-The UE specifies its desired connectivity (such as DNN/slice and QoS), and the AMF is responsible for selecting suitable SMF/UPF instances and coordinating end-to-end path establishment.
+The UE specifies its desired connectivity (such as DNN / slice and QoS), and the AMF is responsible for selecting suitable SMF / UPF instances and coordinating end-to-end path establishment.
 
 From the UE’s perspective, PDU session establishment works roughly as follows:
 
 1. The UE sends a PDU Session Establishment Request (NAS-SM message), containing information such as DNN, S-NSSAI, and requested SSC mode, to the AMF via N2.  
 2. The AMF verifies the UE’s registration and security status, and selects an appropriate SMF based on policy and topology (possibly querying the NRF for available SMF instances).  
 3. The AMF sends a PDU session creation request to the selected SMF via the SBI (for example, `Nsmf_PDUSession_Create`) and waits for the SMF to respond with the allocated IP address, UPF information, and QoS settings.  
-4. Finally, the AMF responds to the UE via NAS (PDU Session Establishment Accept) and coordinates with the gNB to complete the corresponding N3/N9 paths and QoS configuration.
+4. Finally, the AMF responds to the UE via NAS (PDU Session Establishment Accept) and coordinates with the gNB to complete the corresponding N3 / N9 paths and QoS configuration.
 
-In this process, the AMF acts as a “**proxy and coordinator**.” It does not directly handle user-plane packets, but instead translates UE service requirements into actual routing and resource allocation performed by the SMF/UPF.
+In this process, the AMF acts as a “**proxy and coordinator**.” It does not directly handle user-plane packets, but instead translates UE service requirements into actual routing and resource allocation performed by the SMF / UPF.
 
 ### 4.5.3 UE De-registration
 
@@ -179,7 +179,7 @@ From the UE’s perspective, de-registration generally involves:
 1. The UE actively sends a Deregistration Request (NAS-MM message), or the network triggers de-registration under certain conditions.  
 2. After receiving the request, the AMF:
 
-    - Notifies the relevant SMF/UPF instances to release associated PDU sessions and resources  
+    - Notifies the relevant SMF / UPF instances to release associated PDU sessions and resources  
     - Updates it own UE context state (from “registered” back to “de-registered”)  
     - Clears cached state in other NFs (such as PCF and UDM) if necessary
 
@@ -199,9 +199,9 @@ These functions play important roles in day-to-day network operation. However, i
 
 ## 4.6 Chapter Summary
 
-This chapter explained how the AMF, as the “first stop” for UEs entering the 5GC, connects N1/N2 signaling on one side and collaborates with NFs such as SMF, AUSF, UDM, and PCF over the SBA on the other, completing access control, mobility management, security coordination, and PDU session establishment.
+This chapter explained how the AMF, as the “first stop” for UEs entering the 5GC, connects N1 / N2 signaling on one side and collaborates with NFs such as SMF, AUSF, UDM, and PCF over the SBA on the other, completing access control, mobility management, security coordination, and PDU session establishment.
 
-We then analyzed the AMF from an implementation perspective through the N2 protocol stack (SCTP/NGAP/NAS), the startup procedure, and the FSM state machine, breaking down how the AMF processes messages and manages the UE lifecycle.
+We then analyzed the AMF from an implementation perspective through the N2 protocol stack (SCTP / NGAP / NAS), the startup procedure, and the FSM state machine, breaking down how the AMF processes messages and manages the UE lifecycle.
 
 Finally, from the UE’s point of view, this chapter walked through the three main flows—registration, PDU session establishment, and de-registration—and briefly highlighted other procedures such as TAU, paging, and handover, providing the necessary background for subsequent deep dives into NFs such as the SMF and UPF.
 
