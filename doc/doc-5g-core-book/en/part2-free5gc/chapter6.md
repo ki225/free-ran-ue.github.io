@@ -4,7 +4,7 @@
 
 In Chapters 4 and 5, we explored the three most fundamental 5G core network components: AMF / SMF / UPF. In this chapter, we will move on to introduce other network functions that are relatively simpler in functionality but still play important roles. This book does not aim to exhaustively describe every function within each network component. Instead, by focusing on their primary responsibilities, we help readers understand the roles these components play within the overall 5G system.
 
-## 6.1 AUSf
+## 6.1 AUSF
 
 AUSF (Authentication Server Function) is the core network function in the 5GC responsible for **user authentication**. When a UE initiates the registration procedure, the AMF forwards relevant identity information such as the SUCI and SUPI to the AUSF. The AUSF then works together with the UDM to complete authentication procedures such as 5G-AKA or EAP-AKA′, based on the user’s authentication vectors and key material.
 
