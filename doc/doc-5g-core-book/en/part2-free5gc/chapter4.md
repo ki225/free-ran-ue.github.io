@@ -149,7 +149,7 @@ We start with the most common and critical procedure: **UE registration**. You c
 
 From the UE’s perspective, registration roughly proceeds as follows:
 
-1. When the UE powers on or enters a state requiring service, it establishes a connection with the gNB via RRC and sends a **Registration Request (NAS message)** to the gNB.  
+1. When the UE powers on or enters a state requiring service, it establishes a connection with the gNB via RRC and sends a **Registration Request (NAS message)** to the gNB.
 2. The gNB encapsulates this NAS payload into an Initial UE Message (NGAP) and forwards it to the AMF over N2 / SCTP.  
 3. Upon receiving the message, the AMF evaluates the registration cause, PLMN / TA information, and UE capabilities, decides whether to accept the UE, and triggers authentication and subscription data retrieval with AUSF / UDM.
 4. Once security and subscription checks succeed, the AMF sends a Registration Accept to the UE and creates a corresponding UE context internally (including identity information, TA lists, and security parameters).
@@ -163,9 +163,9 @@ The UE specifies its desired connectivity (such as DNN / slice and QoS), and the
 
 From the UE’s perspective, PDU session establishment works roughly as follows:
 
-1. The UE sends a PDU Session Establishment Request (NAS-SM message), containing information such as DNN, S-NSSAI, and requested SSC mode, to the AMF via N2.  
-2. The AMF verifies the UE’s registration and security status, and selects an appropriate SMF based on policy and topology (possibly querying the NRF for available SMF instances).  
-3. The AMF sends a PDU session creation request to the selected SMF via the SBI (for example, `Nsmf_PDUSession_Create`) and waits for the SMF to respond with the allocated IP address, UPF information, and QoS settings.  
+1. The UE sends a PDU Session Establishment Request (NAS-SM message), containing information such as DNN, S-NSSAI, and requested SSC mode, to the AMF via N2.
+2. The AMF verifies the UE’s registration and security status, and selects an appropriate SMF based on policy and topology (possibly querying the NRF for available SMF instances).
+3. The AMF sends a PDU session creation request to the selected SMF via the SBI (for example, `Nsmf_PDUSession_Create`) and waits for the SMF to respond with the allocated IP address, UPF information, and QoS settings.
 4. Finally, the AMF responds to the UE via NAS (PDU Session Establishment Accept) and coordinates with the gNB to complete the corresponding N3 / N9 paths and QoS configuration.
 
 In this process, the AMF acts as a “**proxy and coordinator**.” It does not directly handle user-plane packets, but instead translates UE service requirements into actual routing and resource allocation performed by the SMF / UPF.
@@ -176,11 +176,11 @@ Every journey eventually comes to an end. When the UE powers off, explicitly dis
 
 From the UE’s perspective, de-registration generally involves:
 
-1. The UE actively sends a Deregistration Request (NAS-MM message), or the network triggers de-registration under certain conditions.  
+1. The UE actively sends a Deregistration Request (NAS-MM message), or the network triggers de-registration under certain conditions.
 2. After receiving the request, the AMF:
 
-    - Notifies the relevant SMF / UPF instances to release associated PDU sessions and resources  
-    - Updates it own UE context state (from “registered” back to “de-registered”)  
+    - Notifies the relevant SMF / UPF instances to release associated PDU sessions and resources
+    - Updates it own UE context state (from “registered” back to “de-registered”)
     - Clears cached state in other NFs (such as PCF and UDM) if necessary
 
 3. Finally, the AMF sends a De-registration Accept to the UE, marking the official end of this “journey.”
@@ -191,9 +191,9 @@ Through a complete de-registration procedure, the network ensures that resources
 
 In addition to the core procedures described above, the AMF also handles many other mobility- and access-related operations, such as:
 
-- Tracking Area Update (TAU) and related timer management  
-- Paging (call for idle UEs) and service request procedures  
-- Handover procedures  
+- Tracking Area Update (TAU) and related timer management
+- Paging (call for idle UEs) and service request procedures
+- Handover procedures
 
 These functions play important roles in day-to-day network operation. However, in this book we first focus on the three main flows—**registration, PDU session establishment, and de-registration**—to help readers clearly understand the core interactions between the AMF and the UE before diving deeper into other features.
 
