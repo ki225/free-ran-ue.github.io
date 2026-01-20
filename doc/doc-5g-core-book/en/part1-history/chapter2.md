@@ -42,7 +42,7 @@ Within 3GPP, the work is broadly divided into three major domains:
 > - RAN: defines how radio transmission works
 > - CT: defines how signaling flows and how procedures are executed
 
-### 2.1.2 The Roles of 23.501 / 23.502 / 23.503
+### 2.1.2 The Roles of 23.501 / 23.502
 
 Among the specifications related to the 5G core network, the following three Technical Specifications (TS) are referenced most frequently:
 
@@ -307,7 +307,7 @@ To better protect user privacy, 5G introduces the following identifiers:
 In this chapter, we took a bird’s-eye view of the 5G system and core network from a 3GPP perspective:
 
 - Understood the **role of 3GPP** and the division of responsibilities among SA, RAN, and CT in 5G standardization
-- Clarified the roles of **23.501 / 23.502 / 23.503** in defining architecture, procedures, and policy
+- Clarified the roles of **23.501 / 23.502** in defining architecture, procedures, and policy
 - Examined the overall structure of **5GS = 5GC + NR**, as well as the high-level relationship between UE, RAN, 5GC, and DN.
 - Established a foundational understanding of **the separation between the control plane (N1 / N2 / N4 / Nn) and the user plane (N3 / N6)**
 - Gained an initial understanding of the **Service-Based Architecture (SBA)** and the role of the Service-Based Interface (SBI)
