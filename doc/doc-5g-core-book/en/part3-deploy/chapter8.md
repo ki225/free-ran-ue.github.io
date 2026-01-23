@@ -1,6 +1,6 @@
 # Chapter 8: free5GC Deployment and Configuration
 
-The [official free5GC website](https://free5gc.org) provides a series of deployment guides. In this chapter, we will focus on deployments using bare-metal hosts (including VMs) as well as Docker-based containerized deployments. Rather than only showing how to start free5GC, this chapter explains how to configure NF configuration files and compile the source code correctly, helping readers understand why these parameters need to be set. This deeper understanding will make it much easier to adjust deployment architectures when using free5GC for future research or experiments.
+The [official free5GC website](https://free5gc.org) provides a series of deployment guides. In this chapter, we will focus on deployments using bare-metal hosts (including VMs) as well as Docker-based containerized environments. Rather than only showing how to deploy free5GC, this chapter explains how to configure NF configuration files and compile the source code correctly, helping readers understand why these parameters need to be set. This deeper understanding will make it much easier to adjust deployment architectures when using free5GC for future research or experiments.
 
 > [!Note]
 > The default environment assumed throughout this book is Ubuntu 24.04.
@@ -89,8 +89,9 @@ Since the kernel module is responsible for forwarding user-plane packets, IP For
 
     > [!Note]
     >
-    > - -j `nproc` argument enables parallel downloading for faster cloning!
-    >   The --recursive option ensures that, in addition to the main free5GC repository, all NFs included as Git submodules are also downloaded.
+    > -j `nproc` argument enables parallel downloading for faster cloning!
+    >
+    > The --recursive option ensures that, in addition to the main free5GC repository, all NFs included as Git submodules are also downloaded.
 
 2. Compilation
 
@@ -136,7 +137,7 @@ Since the kernel module is responsible for forwarding user-plane packets, IP For
 
 4. Execution
 
-    In addition to running on bare-metal hosts, free5GC also provides Docker Compose files that allow users to quickly deploy the core network. Two deployment options are supported: using official images or building images locally.
+    After completing the configuration file modifications, you can use the execution scripts provided in the free5GC project to start the entire core network with a single command.
 
     ```bash
     cd free5gc
