@@ -103,7 +103,7 @@ Since the kernel module is responsible for forwarding user-plane packets, IP For
 3. Modify configuration files
 
     Before starting free5GC, configuration files for three NFs must be modified: AMF, SMF, and UPF. These changes allow the core network to accept connections from an external gNB.
-    
+
     - AMF (~/free5gc/config/amfcfg.yaml)
 
         Replace `ngapIpList` with the IP address of the host’s external network interface. This allows the gNB to connect to the AMF using this IP address.
@@ -213,7 +213,7 @@ In addition to bare-metal execution, free5GC also provides Docker Compose config
     docker compose -f docker-compose-build.yaml down
     ```
 
-## 8.4 本章小結
+## 8.4 Chapter Summary
 
 In this chapter, we walked through a complete free5GC deployment from a hands-on perspective. We first explained why the gtp5g kernel module must be installed on the host that carries UPF traffic, and demonstrated how to enable IP forwarding and basic NAT / MTU settings so that the UPF can correctly forward user-plane packets. We then covered installing Go, fetching and compiling the free5GC source code on a bare-metal (or VM) environment, and modifying key AMF / SMF / UPF configuration fields related to external gNB connectivity, followed by launching the entire core network using `run.sh`.
 
