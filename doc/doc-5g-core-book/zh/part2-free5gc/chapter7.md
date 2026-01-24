@@ -71,7 +71,8 @@ ATSSS（Access Traffic Steering, Switching and Splitting）是 5G 為了支援�
 - 在 UE 端的多通道支援與流量分類（通常需要特定的 UE 堆疊配合）
 - 在 5GC 中由 SMF/UPF、PCF 協同決定路徑與策略（例如根據應用類型、QoS、當前路況選擇 3GPP、非 3GPP 或兩者同時）
 
-free5GC 在過去幾年的社群實驗中，也曾經展示過「**N3IWF + 3GPP 的雙連線 ATSSS 範例**」：  
+free5GC 在過去幾年的社群實驗中，也曾經展示過「**N3IWF + 3GPP 的雙連線 ATSSS 範例**」：
+
 UE 一方面透過 5G NR 連上 gNB，另一方面透過 Wi-Fi 與 N3IWF 建立 IPsec 隧道，兩條路徑最後都匯聚到同一個 5GC/UPF，由核心網依據策略將部分流量導向 3GPP，部分流量導向非 3GPP，或在兩者之間進行分流。這樣的組合提供了一個很好的實驗平台，讓你實際體驗「多接取、多路徑」在 5G 核心網中的運作方式。
 
 ## 7.4 本章小結

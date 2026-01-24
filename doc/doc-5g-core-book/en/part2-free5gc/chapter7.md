@@ -31,6 +31,7 @@ Under the assumption of a “trusted,” the security design around the TNGF typ
 > In short, when a Wi-Fi network can be regarded by the operator as “an extension of its own infrastructure,” the TNGF approach is typically used.
 
 ## 7.2 N3IWF
+
 N3IWF (Non-3GPP InterWorking Function) is designed to support **“untrusted non-3GPP networks,”** with the most typical examples being **public Wi-Fi** and user-provided networks (such as home routers or coffee shop hotspots). In these cases, the 5GC cannot trust the Wi-Fi network itself, and therefore must:
 
 - Treat the UE as accessing the network from “an untrusted IP network”
@@ -70,7 +71,7 @@ From an architectural perspective, ATSSS involves:
 - Multi-path support and traffic classification on the UE side (usually requires specific UE stack capabilities)
 - Joint path and policy decisions in the 5GC by the SMF / UPF / PCF (for example selecting 3GPP access, non-3GPP access, or both, based on application type, QoS requirements, and current network conditions)
 
-In community experiments over the past few years, free5GC has also demonstrated “**dual-connectivity ATSSS examples combining N3IWF and 3GPP access**”: 
+In community experiments over the past few years, free5GC has also demonstrated “**dual-connectivity ATSSS examples combining N3IWF and 3GPP access**”:
 
 In these scenarios, the UE connects to a gNB via 5G NR on one side, and establishes an IPsec tunnel with Wi-Fi and the N3IWF on the other. Both paths eventually converge at the same 5GC / UPF, then the core network directs some traffic over 3GPP access and other traffic over non-3GPP access, or splits traffic between the two according to policy. This combination provides an excellent experimental platform for experiencing how “multi-access and multi-path” operation works in the 5G core network.
 

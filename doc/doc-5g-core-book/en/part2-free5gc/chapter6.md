@@ -119,12 +119,12 @@ In the free5GC implementation, this Web Console mainly offers two categories of 
 
 - **Data management and configuration**: Directly operating on the backend MongoDB through a frontend interface, including:
 
-  - Adding, deleting, or modifying UE (user) data and related subscription settings
-  - Managing static configurations related to user such as slices (S-NSSAI), DNNs, and policies
+    - Adding, deleting, or modifying UE (user) data and related subscription settings
+    - Managing static configurations related to user such as slices (S-NSSAI), DNNs, and policies
 
 - **Status monitoring and report export**: While the core network is running, the Web Console and its backend components can:
 
-  - Collect and export UE usage and charging-related reports by establishing FTP or other types of connections with the CHF, enabling further analysis or integration with external systems.
+    - Collect and export UE usage and charging-related reports by establishing FTP or other types of connections with the CHF, enabling further analysis or integration with external systems.
 
 For readers who are learning or experimenting with free5GC, the key point of the Web Console lies in providing an intuitive graphical interface that makes it easier to manage user and policy data in MongoDB and to observe the statistics and charging information generated during actual system operation.
 

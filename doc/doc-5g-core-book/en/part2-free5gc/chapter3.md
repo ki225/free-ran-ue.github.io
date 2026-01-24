@@ -121,9 +121,9 @@ From this directory structure, we can roughly see how an NF is composed at the c
 Understanding this directory layout and module responsibility split helps you quickly identify the following things, when reading any free5GC NF:
 
 - Where the program starts (`cmd/main.go`)
-- Where to look for internal processing logic and logging configuration (`context`、`logger`)
-- Where to trace SBI message flows and behaviors (`sbi` 底下的 server / consumer / processor)
--  Which utilities or shared code can be reused (`util`、`pkg`)
+- Where to look for internal processing logic and logging configuration (`context` / `logger`)
+- Where to trace SBI message flows and behaviors (server / consumer / processor under `sbi`)
+- Which utilities or shared code can be reused (`util` / `pkg`)
 
 ## 3.4 Chapter Summary
 

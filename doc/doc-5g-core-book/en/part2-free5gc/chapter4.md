@@ -102,7 +102,6 @@ In the free5GC implementation, the AMF startup procedure can be roughly divided 
 
     Starts the SCTP listener on the N2 interface, initializes the NGAP protocol handling modules, and prepares to receive NGAP messages from the gNB along with the encapsulated NAS payloads.
 
-
 5. **Enter the Event Loop to Handle Signaling and Errors**
 
     Finally, the AMF enters the main event loop, continuously handling:
