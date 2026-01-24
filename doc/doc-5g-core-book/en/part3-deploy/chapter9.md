@@ -55,7 +55,7 @@ userplaneInformation:
 Here:
 
 - `gNB1` represents an access node (the gNB connected via N3)
-- `I-UPF` is the upstream diversion node (the ULCL) 
+- `I-UPF` is the upstream diversion node (the ULCL)
 - `PSA-UPF` is the downstream anchor UPF (PDU Session Anchor)
 
 With this declaration, the SMF learns “which user-plane nodes are available” and how to select paths when establishing PDU sessions.
