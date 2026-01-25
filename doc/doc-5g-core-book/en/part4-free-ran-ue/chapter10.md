@@ -24,7 +24,7 @@ This chapter first explains why many teams eventually find simulators indispensa
 
 As a result, most teams gradually introduce RAN / UE simulators across different phases— “feature development → regression testing → stress and concurrency testing → abnormal scenario validation”—to make testing faster, more cost-effective, and reproducible.
 
-## 10.2 Mainstream simulators today: Integrated vs. decoupled
+## 10.2 Mainstream simulators today: Integrated vs. Decoupled
 
 Current common open-source approaches can generally be divided into two categories:
 
