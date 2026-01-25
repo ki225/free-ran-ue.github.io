@@ -19,6 +19,22 @@
   </div>
 </div>
 
+<div class="author-intro">
+  <div>
+    <img alt="kiki" src="https://avatars.githubusercontent.com/u/123147937?v=4">
+    <div class="author-info">
+      <h2><a href="https://ki225.github.io/">Yung-Chi Huang (Kiki)</a></h2>
+      <div class="exp">
+        <p>BS @ NCU</p>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    <p>Hi, I'm Kiki! I’m currently a bachelor’s student who got into networking through Cloud, and along the way, I found myself stepping into the world of 5G.</p>
+    <p>When I first started learning 5G, I honestly felt quite lost and didn’t know where to begin. I hope this English version helps others get a head start with <a href="https://free5gc.org">free5GC</a>, especially for beginners who are looking for a structured place to start, just like I was.</p>
+  </div>
+</div>
+
 <div class="chapter-nav">
   <a href="../part1-history/chapter1/" class="nav-btn nav-next" title="Next: From 4G to 5G — Evolution of Core Network Architecture">
     <span class="arrow"></span>
