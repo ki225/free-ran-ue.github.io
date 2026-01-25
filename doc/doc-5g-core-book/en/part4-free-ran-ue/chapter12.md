@@ -105,30 +105,30 @@ free-ran-ue currently supports the following three startup methods:
 
 The core concept of the configuration is simple: **ensure that free5GC (the core network) and the gNB / UE (the simulator) reside on mutually reachable networks, with consistent IP / port settings**.
 
-When deploying free5GC in Chapter 8, you configured the service addresses in the AMF/SMF/UPF configuration files. Similarly, the gNB configuration file in free-ran-ue must specify the corresponding AMF and UPF addresses to successfully establish control-plane and user-plane connectivity.
+When deploying free5GC in Chapter 8, you configured the service addresses in the AMF / SMF / UPF configuration files. Similarly, the gNB configuration file in free-ran-ue must specify the corresponding AMF / UPF addresses to successfully establish control-plane and user-plane connectivity.
 
 1. Network and address planning (recommended approach)
 
     Using the free-ran-ue [gNB configuration](https://github.com/free-ran-ue/free-ran-ue/blob/main/config/gnb.yaml) and [UE configuration](https://github.com/free-ran-ue/free-ran-ue/blob/main/config/ue.yaml) as examples, the overall topology can be understood in two segments:
 
-    - **Core network ↔ gNB (N2/N3)**: `10.0.1.0/24`
+    - **Core network ↔ gNB (N2 / N3)**: `10.0.1.0/24`
 
-        - Core network (AMF/UPF): `10.0.1.1`
+        - Core network (AMF / UPF): `10.0.1.1`
         - gNB (RAN): `10.0.1.2`
 
     - **UE ↔ gNB (local access segment)**: `10.0.2.0/24`
 
         - gNB access address exposed to UEs: `10.0.2.1`
-        - The UE establishes control-plane and user-plane connectivity via this address
+        - The UE establishes control-plane / user-plane connectivity via this address
 
     > [!Note]
-    > Key point: In standalone host mode, network isolation is not provided automatically. You must ensure that these two subnets are correctly routed or bound on the host (e.g., via appropriate interfaces or routing rules). Otherwise, even with correct configuration files, connections will fail due to network reachability issues.
+    > Key point: In standalone host mode, “network isolation is not provided automatically.” You must ensure that these two subnets are correctly routed / bound on the host (e.g., via appropriate interfaces or routing rules). Otherwise, even with correct configuration files, connections will fail due to network reachability issues.
 
 2. Key fields in the gNB configuration
 
-    The following fields are most commonly required to be aligned (other fields such as `plmnId`, `tai`, and `snssai` must also match UE and subscriber settings):
+    The following fields are most commonly required to be aligned (other fields such as `plmnId` / `tai` / `snssai` must also match UE and subscriber settings):
 
-    - **Core network connectivity (N2/N3)**
+    - **Core network connectivity (N2 / N3)**
 
         - `amfN2Ip`: AMF N2 IP (e.g., `10.0.1.1`)
         - `ranN2Ip`: gNB N2 IP used to connect to the AMF (e.g., `10.0.1.2`)
@@ -157,25 +157,25 @@ When deploying free5GC in Chapter 8, you configured the service addresses in the
 
     - **Identity and authentication (must match free5GC subscriber data)**
 
-        - `plmnId (mcc/mnc)` + `msin`: Together form the UE identity (one of the sources of IMSI/SUPI)
+        - `plmnId (mcc/mnc)` + `msin`: Together form the UE identity (one of the sources of IMSI / SUPI)
         - `authenticationSubscription`: Authentication parameters (e.g., `encPermanentKey`, `encOpcKey`, `sequenceNumber`)
 
     - **User-plane services**
 
-        - `pduSession.dnn`: Target DNN (e.g., `internet`)
+        - `pduSession.dnn`: Target DNN for connection (e.g., `internet`)
         - `pduSession.snssai`: Target slice (must match subscriber configuration)
         - `ueTunnelDevice`: Prefix for the UE local TUN interface name (e.g., `ueTun`, commonly resulting in `ueTun0`)
 
 4. Startup order and verification
 
-    It is recommended to start components in the following order and verify each step before proceeding:
+    It is recommended to start the components in the following order and validate them step by step (only proceed after each step passes):
 
     1. **Start free5GC**, ensuring that AMF, UPF, and other NFs are running normally, and that the AMF (N2) and UPF (N3) addresses are reachable from the gNB
-    2. **Create the subscriber in the Web Console**, ensuring IMSI, authentication data, S-NSSAI, and DNN match the UE configuration
+    2. **Create the subscriber in the Web Console**, ensuring IMSI / authentication data / S-NSSAI / DNN match the UE configuration
     3. **Start the gNB**
 
         - Logs should show successful NGAP establishment with the AMF
-        - If the user plane is enabled, logs should indicate successful user-plane connectivity and tunnel setup with the UPF
+        - If the user plane is enabled, logs should indicate successful user-plane connectivity / tunnel setup with the UPF
 
     4. **Start the UE**
 
@@ -183,15 +183,15 @@ When deploying free5GC in Chapter 8, you configured the service addresses in the
         - The UE TUN interface (e.g., `ueTun0`) should appear on the host
 
     > [!Caution]
-    > If the process stalls, first check IP reachability and IP/port alignment in the configuration files. Only then verify authentication data and slice/DNN consistency.
+    > If the process stalls: first check “IP reachability” and “IP / port alignment” in the configuration files. Only then verify authentication data and slice / DNN consistency.
 
 ## 12.5 Chapter Summary
 
-This chapter emphasizes that, when integrating free-ran-ue with free5GC, the most critical factor is not “which commands to run,” but rather having a clear understanding of the dependency chain: the core network must contain the appropriate subscriber data before the gNB can establish control-plane connectivity and prepare the user-plane path; only then can the UE successfully complete registration and PDU Session establishment, ultimately creating a local data channel such as `ueTun0`.
+This chapter emphasizes that, when integrating free-ran-ue with free5GC, the most critical factor is not “which commands to run,” but rather having a clear understanding of the dependency chain: the core network must contain the appropriate subscriber data before the gNB can establish control-plane connectivity and prepare the user-plane path. Only then can the UE successfully complete registration and PDU Session establishment, ultimately creating a local data channel such as `ueTun0`.
 
 In practice, most issues can be diagnosed quickly by following two principles:
 
-- **Connectivity first, authentication second, user plane last**: First verify IP and port reachability and interface connectivity, then validate IMSI, authentication data, and slice/DNN consistency, and finally inspect PDU Session establishment and user-plane packet flow.
-- **Configuration consistency**: PLMN, S-NSSAI, and DNN values in the gNB/UE configuration files must match the subscriber settings in the free5GC Web Console; otherwise, procedures will fail during registration or session establishment.
+- **Connectivity first, authentication second, user plane last**: First verify IP / port reachability and interface connectivity, then validate IMSI / authentication data, and slice / DNN consistency, and finally inspect PDU Session establishment and that user-plane packets can flow end to end.
+- **Configuration consistency**: PLMN, S-NSSAI, and DNN values in the gNB / UE configuration files must match the subscriber settings in the free5GC Web Console; otherwise, procedures will fail during registration or session establishment.
 
-This chapter also compared three startup methods (standalone host, namespace-based, and Docker-based). You can select the appropriate deployment approach based on debugging convenience, isolation requirements, reproducibility, and CI integration needs, and progressively engineer the integration workflow into a reusable test environment.
+This chapter also compared three startup methods (standalone host, namespace-based, and Docker-based). You can select the appropriate deployment approach based on “debugging convenience, isolation requirements, reproducibility, and CI integration needs,” and progressively engineer the integration workflow into a reusable test environment.
