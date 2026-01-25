@@ -29,7 +29,7 @@ As a result, most teams gradually introduce RAN / UE simulators across different
 Current common open-source approaches can generally be divided into two categories:
 
 - **Integrated**: A single tool bundles major RAN and UE behaviors together, providing an out-of-the-box experience focused on “getting the flow running quickly.”
-- **Decoupled (Modular)**: RAN and UE (or their control-plane and user-plane components) are more modular, allowing components to be swapped for different scenarios and enabling more fine-grained testing and extensibility.
+- **Decoupled / Modular**: RAN and UE (or their control-plane and user-plane components) are more modular, allowing components to be swapped for different scenarios and enabling more fine-grained testing and extensibility.
 
 ### 10.2.1 Open-source simulator examples
 
@@ -40,7 +40,7 @@ Current common open-source approaches can generally be divided into two categori
     - Advantages
 
         - **Quick to get started**: High integration and minimal dependencies make it suitable for rapidly validating basic 5GC procedures.
-        - **Automation-friendly**: Relatively easy to integrate into CI or container-based environments for smoke testing.
+        - **Automation-friendly**: Relatively easy to integrate into CI / container-based environments for smoke testing.
         - **Lower resource requirements**: Generally lightweight for small-scale tests.
 
     - Limitations
@@ -68,7 +68,7 @@ Current common open-source approaches can generally be divided into two categori
 | Category | Tool | Primary use cases | Advantages | Limitations |
 | - | - | - | - | - |
 | Integrated | packetrusher | Rapid PoC, education, CI smoke tests | Fast setup, simple deployment, automation-friendly | Limited customization / scalability; feature coverage must be verified |
-| Decoupled | free-ran-ue | System integration testing, multi-scenario regression, multi-node/multi-UPF validation | Engineering-oriented, extensible, suitable for long-term test assets | - |
+| Decoupled | free-ran-ue | System integration testing, multi-scenario regression, multi-node / multi-UPF validation | Engineering-oriented, extensible, suitable for long-term test assets | - |
 
 ## Summary
 
