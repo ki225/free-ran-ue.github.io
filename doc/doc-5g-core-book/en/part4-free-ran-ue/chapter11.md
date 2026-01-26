@@ -26,8 +26,7 @@ The following structure shows the layout of the [free-ran-ue main repository](ht
 ├── script <= Scripts
 │   ├── 10k-test-script <= Large-scale UE  scripts
 │   └── namespace-script <= Namespace scripts
-├── ue <= UE runtime implementation
-└── util <= Utility function package
+└── ue <= UE runtime implementation
 ```
 
 ## 11.3 RAN (gNB)
