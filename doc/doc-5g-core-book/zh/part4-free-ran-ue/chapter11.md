@@ -26,8 +26,7 @@ free-ran-ue 的核心目標，是為核心網使用者提供一套**輕量、可
 ├── script <= 腳本
 │   ├── 10k-test-script <= 大量 UE 腳本
 │   └── namespace-script <= 命名空間腳本
-├── ue <= UE 執行程式碼
-└── util <= 工具函數包
+└── ue <= UE 執行程式碼
 ```
 
 ## 11.3 RAN（gNB）
