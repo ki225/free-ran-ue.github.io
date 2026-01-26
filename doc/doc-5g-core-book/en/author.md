@@ -30,8 +30,8 @@
     </div>
   </div>
   <div class="description">
-    <p>Hi, I'm Kiki! I’m currently a bachelor’s student who got into networking through Cloud, and along the way, I found myself stepping into the world of 5G.</p>
-    <p>When I first started learning 5G, I honestly felt quite lost and didn’t know where to begin. I hope this English version helps others get a head start with <a href="https://free5gc.org">free5GC</a>, especially for beginners who are looking for a structured place to start, just like I was.</p>
+    <p>Hi, I'm Kiki! I’m currently a bachelor’s student who got into networking through cloud technologies. After being introduced to 5G in my senior year, I decided to dive deeper into the field in graduate school.</p>
+    <p>When I first started learning 5G, I honestly felt quite lost and didn’t know where to begin. Therefore, I hope this book provides a clearer direction for anyone looking to learn 5G with <a href="https://free5gc.org">free5GC</a>, making the journey a little easier for beginners—just like I once needed.</p>
   </div>
 </div>
 
